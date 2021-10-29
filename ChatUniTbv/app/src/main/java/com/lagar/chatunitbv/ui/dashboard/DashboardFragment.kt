@@ -24,7 +24,7 @@ class DashboardFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         dashboardViewModel =
             ViewModelProvider(this).get(DashboardViewModel::class.java)
 
