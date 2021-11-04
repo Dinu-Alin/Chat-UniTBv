@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "16200166769",
+    "firebase_url": "https://messaging-app-d862c-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "messaging-app-d862c",
+    "storage_bucket": "messaging-app-d862c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16200166769:android:0c66c23f2a0d33bafb1ad0",
+        "android_client_info": {
+          "package_name": "com.example.socialunitbv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "16200166769-gusjqmfle0b3ns56c5iul8aasj847vh2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClHZSlvvtNfTG84vrEHrAU7yADu63074U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "16200166769-gusjqmfle0b3ns56c5iul8aasj847vh2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

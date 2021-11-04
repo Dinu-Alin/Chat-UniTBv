@@ -27,7 +27,7 @@ class StartFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       viewModel=
+        viewModel =
             ViewModelProvider(this).get(StartViewModel::class.java)
 
         _binding = StartFragmentBinding.inflate(inflater, container, false)
