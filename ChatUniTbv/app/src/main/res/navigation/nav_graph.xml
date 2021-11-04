@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_start">
+
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.lagar.chatunitbv.ui.authentication.login.LoginFragment"
+        android:label="@string/login_fragment_label"
+        tools:layout="@layout/login_fragment" />
+    <fragment
+        android:id="@+id/navigation_start"
+        android:name="com.lagar.chatunitbv.ui.authentication.start.StartFragment"
+        android:label="@string/start_fragment_label"
+        tools:layout="@layout/start_fragment">
+
+        <action
+            android:id="@+id/action_startFragment_to_loginFragment"
+            app:destination="@id/navigation_login" />
+        <action
+            android:id="@+id/action_startFragment_to_registerFragment"
+            app:destination="@id/navigation_register" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_register"
+        android:name="com.lagar.chatunitbv.ui.authentication.register.RegisterFragment"
+        android:label="register_fragment"
+        tools:layout="@layout/register_fragment" />
+</navigation>
