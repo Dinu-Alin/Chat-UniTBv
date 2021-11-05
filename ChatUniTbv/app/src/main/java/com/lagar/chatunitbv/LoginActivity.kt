@@ -8,7 +8,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.lagar.chatunitbv.databinding.ActivityLoginBinding
-import com.lagar.chatunitbv.databinding.ActivityMainBinding
 
 class LoginActivity : AppCompatActivity() {
 
