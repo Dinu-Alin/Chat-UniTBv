@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
 //        })
         val btnView: Button = binding.goBtn
         btnView.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_home_to_navigation_notifications2)
+            findNavController().navigate(R.id.action_navigation_home_to_notifications)
         }
         return root
     }

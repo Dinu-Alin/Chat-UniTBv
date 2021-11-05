@@ -3,6 +3,7 @@ package com.lagar.chatunitbv.ui.authentication.login
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -53,8 +54,10 @@ class LoginFragment : Fragment() {
     }
 
     private fun signIn(email: String, password: String) {
-        val intent = Intent(activity, MainActivity::class.java)
-        startActivity(intent)
+//        val intent = Intent(activity, MainActivity::class.java)
+//        startActivity(intent)
+        val directions = LoginFragmentDirections.navigateToMainActivity()
+        findNavController().navigate(directions)
     }
 
 
