@@ -11,13 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.lagar.chatunitbv.MainActivity
+import com.lagar.chatunitbv.activities.MainActivity
 import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.LoginFragmentBinding
 
 class LoginFragment : Fragment() {
 
-    private var _binding : LoginFragmentBinding? = null
+    private var _binding: LoginFragmentBinding? = null
 
     private val binding get() = _binding!!
 

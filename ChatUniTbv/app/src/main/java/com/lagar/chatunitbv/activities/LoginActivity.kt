@@ -1,4 +1,4 @@
-package com.lagar.chatunitbv
+package com.lagar.chatunitbv.activities
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
