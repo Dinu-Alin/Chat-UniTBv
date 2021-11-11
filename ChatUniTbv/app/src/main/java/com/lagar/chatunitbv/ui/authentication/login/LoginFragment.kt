@@ -14,6 +14,9 @@ import androidx.navigation.fragment.findNavController
 import com.lagar.chatunitbv.activities.MainActivity
 import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.LoginFragmentBinding
+import com.google.firebase.auth.FirebaseUser
+import com.lagar.chatunitbv.firebase.autentification.Authenticator
+
 
 class LoginFragment : Fragment() {
 
@@ -22,6 +25,8 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
 
     companion object {
+        private const val TAG = "EmailPassword"
+
         fun newInstance() = LoginFragment()
     }
 
@@ -53,11 +58,26 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
+
     private fun signIn(email: String, password: String) {
-//        val intent = Intent(activity, MainActivity::class.java)
-//        startActivity(intent)
-        val directions = LoginFragmentDirections.navigateToMainActivity()
-        findNavController().navigate(directions)
+
+        val auth = Authenticator.instance
+
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+
+                val user = auth.currentUser
+                val directions = LoginFragmentDirections.navigateToMainActivity()
+                findNavController().navigate(directions)
+            } else {
+                Toast.makeText(
+                    context, "Authentication failed.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+
     }
 
 
@@ -67,7 +87,7 @@ class LoginFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         // TODO: Use the ViewModel
     }
 

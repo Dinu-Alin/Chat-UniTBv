@@ -12,7 +12,7 @@ android {
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
-        applicationId = "com.example.socialunitbv"
+        applicationId = "com.lagar.chatunitbv"
         minSdkVersion(26)
         targetSdkVersion(30)
         versionCode = 1
