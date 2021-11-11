@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Chat@UniTbv</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_chats">Chats</string>
+    <string name="title_people">People</string>
     <string name="title_notifications">Notifications</string>
     <string name="go_to_navigation">go to navigation</string>
 
