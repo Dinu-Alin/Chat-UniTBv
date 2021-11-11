@@ -1,4 +1,4 @@
-package com.lagar.chatunitbv
+package com.lagar.chatunitbv.activities
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -8,7 +8,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.lagar.chatunitbv.databinding.ActivityLoginBinding
-import com.lagar.chatunitbv.databinding.ActivityMainBinding
 
 class LoginActivity : AppCompatActivity() {
 
@@ -20,7 +19,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        supportActionBar?.hide()
 
     }
 }

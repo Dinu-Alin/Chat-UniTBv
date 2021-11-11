@@ -9,9 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.lagar.chatunitbv.R
-import com.lagar.chatunitbv.databinding.FragmentHomeBinding
 import com.lagar.chatunitbv.databinding.StartFragmentBinding
-import com.lagar.chatunitbv.ui.home.HomeViewModel
 
 class StartFragment : Fragment() {
 
