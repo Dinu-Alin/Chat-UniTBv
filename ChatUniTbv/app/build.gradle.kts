@@ -64,6 +64,7 @@ dependencies {
     implementation("com.google.firebase:firebase-database-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-messaging-ktx")
+    implementation ("com.google.firebase:firebase-firestore-ktx")
 
 
     //Volley
