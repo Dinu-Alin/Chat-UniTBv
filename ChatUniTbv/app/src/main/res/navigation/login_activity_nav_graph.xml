@@ -31,7 +31,11 @@
         android:id="@+id/navigation_register"
         android:name="com.lagar.chatunitbv.ui.authentication.register.RegisterFragment"
         android:label="register_fragment"
-        tools:layout="@layout/register_fragment" />
+        tools:layout="@layout/register_fragment" >
+        <action
+            android:id="@+id/action_navigation_register_to_navigation_login"
+            app:destination="@id/navigation_login" />
+    </fragment>
 
     <activity
         android:id="@+id/mainActivity"

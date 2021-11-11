@@ -15,6 +15,7 @@
         <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/menu/bottom_nav_menu.xml" value="0.21875" />
         <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.23489583333333333" />
         <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.23489583333333333" />
+        <entry key="..\:/ChatUniTBv/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22715143428952636" />
         <entry key="..\:/ChatUniTBv/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable/logo_unitbv.xml" value="0.26666666666666666" />
         <entry key="..\:/ChatUniTBv/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable/shape_button_background_black.xml" value="0.27870370370370373" />
         <entry key="..\:/ChatUniTBv/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable/shape_button_background_gray.xml" value="0.1" />
@@ -25,8 +26,9 @@
         <entry key="..\:/ChatUniTBv/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/ChatUniTBv/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/fragment_notifications.xml" value="0.15744535519125682" />
         <entry key="..\:/ChatUniTBv/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/login_fragment.xml" value="0.10666666666666667" />
-        <entry key="..\:/ChatUniTBv/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/register_fragment.xml" value="0.1" />
+        <entry key="..\:/ChatUniTBv/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/register_fragment.xml" value="0.22" />
         <entry key="..\:/ChatUniTBv/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/start_fragment.xml" value="0.13333333333333333" />
+        <entry key="..\:/ChatUniTBv/Chat-UniTBv/ChatUniTbv/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22152777777777777" />
       </map>
     </option>
   </component>

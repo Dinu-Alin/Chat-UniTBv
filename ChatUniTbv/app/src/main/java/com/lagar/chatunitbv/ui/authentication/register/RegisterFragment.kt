@@ -6,10 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.lagar.chatunitbv.R
+import com.lagar.chatunitbv.databinding.LoginFragmentBinding
+import com.lagar.chatunitbv.databinding.RegisterFragmentBinding
 
 class RegisterFragment : Fragment() {
+    private var _binding : RegisterFragmentBinding? = null
 
+    private val binding get() = _binding!!
     companion object {
         fun newInstance() = RegisterFragment()
     }
@@ -20,7 +25,14 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.register_fragment, container, false)
+        _binding = RegisterFragmentBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+
+        binding.goToLoginButton.setOnClickListener{
+            findNavController().navigate(R.id.action_navigation_register_to_navigation_login)
+
+        }
+        return root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
