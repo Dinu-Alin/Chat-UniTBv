@@ -17,6 +17,7 @@ import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.LoginFragmentBinding
 import com.google.firebase.auth.FirebaseUser
 import com.lagar.chatunitbv.firebase.autentification.Authenticator
+import com.lagar.chatunitbv.util.InternetCheck
 
 
 class LoginFragment : Fragment() {
@@ -41,18 +42,28 @@ class LoginFragment : Fragment() {
 
         binding.btnLogin.setOnClickListener {
 
-            val email = binding.editTextEmail.text.toString()
-            val password = binding.editTextPassword.text.toString()
+            if (view?.let { it1 -> InternetCheck.isOnline(it1.context) } == true) {
 
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                signIn(email, password)
+                val email = binding.editTextEmail.text.toString()
+                val password = binding.editTextPassword.text.toString()
+
+                if (email.isNotEmpty() && password.isNotEmpty()) {
+                    signIn(email, password)
+                } else {
+                    Toast.makeText(
+                        it.context,
+                        "Please fill in all the required fields",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+
             } else {
                 Toast.makeText(
                     it.context,
-                    "Please fill in all the required fields",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                    "Please check your internet connection!",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
 

@@ -1,5 +1,6 @@
 package com.lagar.chatunitbv.ui.people
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -38,5 +39,18 @@ class PeopleFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // log out from shared preferences
+        binding.btnLogout.setOnClickListener {
+            val preferences =
+                this.activity?.getSharedPreferences("REMEMBER_USER", Context.MODE_PRIVATE)
+                    ?.edit()
+            preferences?.putBoolean("user", false)
+            preferences?.apply()
+        }
     }
 }
