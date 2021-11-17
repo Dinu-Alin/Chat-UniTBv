@@ -1,5 +1,6 @@
 package com.lagar.chatunitbv.ui.authentication.login
 
+import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -68,6 +69,7 @@ class LoginFragment : Fragment() {
 
                 val user = auth.currentUser
                 val directions = LoginFragmentDirections.navigateToMainActivity()
+                rememberMe(binding.checkboxRememberMe.isChecked)
                 findNavController().navigate(directions)
             } else {
                 Toast.makeText(
@@ -80,6 +82,14 @@ class LoginFragment : Fragment() {
 
     }
 
+
+    private fun rememberMe(checked: Boolean) {
+        val preferences =
+            this.activity?.getSharedPreferences("REMEMBER_USER", Context.MODE_PRIVATE)
+                ?.edit()
+        preferences?.putBoolean("user", checked)
+        preferences?.apply()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
