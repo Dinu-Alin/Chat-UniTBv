@@ -49,10 +49,10 @@ dependencies {
     implementation("com.google.firebase:firebase-messaging:23.0.0")
     implementation("androidx.work:work-runtime:2.7.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    val kotlin_version = "1.5.10"
+    val kotlin_version = "1.5.20"
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}")
     implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("androidx.appcompat:appcompat:1.4.0")
     implementation("com.google.android.material:material:1.4.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.1")
     testImplementation("junit:junit:4.13.2")

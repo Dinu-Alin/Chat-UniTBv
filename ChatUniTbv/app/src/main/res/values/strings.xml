@@ -14,9 +14,18 @@
     <string name="confirm_password">Confirm password</string>
     <string name="title_activity_main2">MainActivity</string>
 
+    <string name="user_image">User Image</string>
+    <string name="name">John Johnson</string>
+    <string name="group">Group</string>
+    <string name="field_of_study">Field of study</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
     <string name="log_out">LOG OUT</string>
     <string name="remember_me">Remember me</string>
     <string name="title_activity_login">LoginActivity</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
