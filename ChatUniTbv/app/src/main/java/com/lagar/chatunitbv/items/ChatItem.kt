@@ -5,15 +5,16 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.ChatItemLayoutBinding
+import com.lagar.chatunitbv.models.Chat
 import com.xwray.groupie.viewbinding.BindableItem
 
-class ChatItem(var imageUrl: String, var chatName: String, var time: String) :
+class ChatItem(val chat: Chat?) :
     BindableItem<ChatItemLayoutBinding>() {
 
     override fun bind(binding: ChatItemLayoutBinding, position: Int) {
-        binding.chatLastAcessed.text = time
-        binding.chatName.text = chatName
-        binding.chatPhotoRv.load(imageUrl) {
+        binding.chatLastAcessed.text = chat?.time ?: ""
+        binding.chatName.text = chat?.name ?: "CHAT_NAME"
+        binding.chatPhotoRv.load(chat?.imageUrl) {
             crossfade(true)
             transformations(CircleCropTransformation())
         }

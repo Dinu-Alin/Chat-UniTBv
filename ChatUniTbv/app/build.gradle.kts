@@ -61,9 +61,7 @@ dependencies {
 
     //firebase
     implementation(platform("com.google.firebase:firebase-bom:28.0.1"))
-    implementation("com.google.firebase:firebase-database-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
-    implementation("com.google.firebase:firebase-messaging-ktx")
     implementation ("com.google.firebase:firebase-firestore-ktx")
 
 
@@ -72,6 +70,7 @@ dependencies {
 //
     //coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1")
 
     //Retrofit
