@@ -1,4 +1,4 @@
-package com.lagar.chatunitbv.ui.authentication.register
+package com.lagar.chatunitbv.fragments.authentication.register
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.lagar.chatunitbv.R
-import com.lagar.chatunitbv.databinding.LoginFragmentBinding
 import com.lagar.chatunitbv.databinding.RegisterFragmentBinding
 
 class RegisterFragment : Fragment() {

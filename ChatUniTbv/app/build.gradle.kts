@@ -80,18 +80,23 @@ dependencies {
     // GSON
     implementation("com.squareup.retrofit2:converter-gson:2.6.0")
 
-    //Coil
+    // Coil
     implementation("io.coil-kt:coil:1.2.2")
 
-    //Material Design
+    // Material Design
     implementation("com.google.android.material:material:1.4.0")
 
-    //Timber
+    // Timber
     implementation("com.github.ajalt:timberkt:1.5.1")
 
-    //Room
-    val room_version = "2.3.0"
-    implementation("androidx.room:room-runtime:${room_version}")
-    annotationProcessor("androidx.room:room-compiler:${room_version}")
+    // Room
+//    val room_version = "2.3.0"
+//    implementation("androidx.room:room-runtime:${room_version}")
+//    annotationProcessor("androidx.room:room-compiler:${room_version}")
+
+    // Groupie
+//    val groupie_version = "2.10.0"
+    implementation("com.github.lisawray.groupie:groupie:2.10.0")
+    implementation("com.github.lisawray.groupie:groupie-viewbinding:2.10.0")
 
 }

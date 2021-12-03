@@ -1,4 +1,4 @@
-package com.lagar.chatunitbv.ui.authentication.register
+package com.lagar.chatunitbv.fragments.authentication.register
 
 import androidx.lifecycle.ViewModel
 

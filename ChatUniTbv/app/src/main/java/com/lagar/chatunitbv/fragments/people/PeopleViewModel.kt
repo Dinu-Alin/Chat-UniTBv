@@ -1,4 +1,4 @@
-package com.lagar.chatunitbv.ui.people
+package com.lagar.chatunitbv.fragments.people
 
 import androidx.lifecycle.ViewModel
 

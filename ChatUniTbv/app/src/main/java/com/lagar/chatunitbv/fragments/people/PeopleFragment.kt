@@ -1,4 +1,4 @@
-package com.lagar.chatunitbv.ui.people
+package com.lagar.chatunitbv.fragments.people
 
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
@@ -7,11 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
-import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.PeopleFragmentBinding
 
 class PeopleFragment : Fragment() {

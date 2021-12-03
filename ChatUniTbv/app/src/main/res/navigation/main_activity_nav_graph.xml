@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_chats"
-        android:name="com.lagar.chatunitbv.ui.chats.ChatFragment"
+        android:name="com.lagar.chatunitbv.fragments.chats.ChatFragment"
         android:label="@string/title_chats"
         tools:layout="@layout/chat_fragment">
         <action
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/navigation_people"
-        android:name="com.lagar.chatunitbv.ui.people.PeopleFragment"
+        android:name="com.lagar.chatunitbv.fragments.people.PeopleFragment"
         android:label="@string/title_people"
         tools:layout="@layout/people_fragment" >
         <action

@@ -39,4 +39,6 @@
     <string name="unitbv_logo">UNITBV logo</string>
     <string name="login">Login</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <string name="exit">Exit</string>
+    <string name="toolbar_title">Toolbar Title</string>
 </resources>
