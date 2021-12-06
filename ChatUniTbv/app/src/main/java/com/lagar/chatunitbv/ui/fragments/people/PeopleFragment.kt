@@ -1,16 +1,14 @@
 package com.lagar.chatunitbv.ui.fragments.people
 
 import android.content.Context
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.lagar.chatunitbv.databinding.PeopleFragmentBinding
 
 class PeopleFragment : Fragment() {
-    private lateinit var peopleViewModel: PeopleViewModel
     private var _binding: PeopleFragmentBinding? = null
 
 
@@ -21,14 +19,9 @@ class PeopleFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        peopleViewModel =
-            ViewModelProvider(this)[PeopleViewModel::class.java]
         _binding = PeopleFragmentBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-
-
-        return root
+        return binding.root
     }
 
     override fun onDestroyView() {

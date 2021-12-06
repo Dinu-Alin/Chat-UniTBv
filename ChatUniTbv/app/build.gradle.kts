@@ -59,7 +59,7 @@ dependencies {
     //firebase
     implementation(platform("com.google.firebase:firebase-bom:28.0.1"))
     implementation("com.google.firebase:firebase-auth-ktx")
-    implementation ("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
 
 
     //Volley
@@ -90,9 +90,19 @@ dependencies {
 //    implementation("androidx.room:room-runtime:${room_version}")
 //    annotationProcessor("androidx.room:room-compiler:${room_version}")
 
-    // Groupie
-//    val groupie_version = "2.10.0"
-    implementation("com.github.lisawray.groupie:groupie:2.10.0")
-    implementation("com.github.lisawray.groupie:groupie-viewbinding:2.10.0")
+    // FastAdapter
+
+    val latestFastAdapterRelease = "5.6.0"
+    implementation("com.mikepenz:fastadapter:${latestFastAdapterRelease}")
+    implementation("com.mikepenz:fastadapter-extensions-expandable:${latestFastAdapterRelease}")
+    implementation("com.mikepenz:fastadapter-extensions-binding:${latestFastAdapterRelease}") // view binding helpers
+    implementation("com.mikepenz:fastadapter-extensions-diff:${latestFastAdapterRelease}") // diff util helpers
+    implementation("com.mikepenz:fastadapter-extensions-drag:${latestFastAdapterRelease}") // drag support
+    implementation("com.mikepenz:fastadapter-extensions-paged:${latestFastAdapterRelease}") // paging support
+    implementation("com.mikepenz:fastadapter-extensions-scroll:${latestFastAdapterRelease}")// scroll helpers
+    implementation("com.mikepenz:fastadapter-extensions-swipe:${latestFastAdapterRelease}")// swipe support
+    implementation("com.mikepenz:fastadapter-extensions-ui:${latestFastAdapterRelease}")// pre-defined ui components
+    implementation("com.mikepenz:fastadapter-extensions-utils:${latestFastAdapterRelease}")// needs the `expandable`, `drag` and `scroll` extension.
+
 
 }

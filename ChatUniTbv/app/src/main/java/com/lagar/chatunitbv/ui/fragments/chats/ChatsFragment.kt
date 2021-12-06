@@ -12,9 +12,8 @@ import com.google.firebase.firestore.ktx.toObject
 import com.lagar.chatunitbv.databinding.ChatsFragmentBinding
 import com.lagar.chatunitbv.items.ChatItem
 import com.lagar.chatunitbv.models.Chat
-import com.lagar.chatunitbv.util.extensions.update
-import com.xwray.groupie.GroupieAdapter
-import com.xwray.groupie.Section
+import com.mikepenz.fastadapter.FastAdapter
+import com.mikepenz.fastadapter.adapters.ItemAdapter
 import kotlinx.coroutines.*
 import timber.log.Timber
 
@@ -22,17 +21,18 @@ import timber.log.Timber
 class ChatsFragment : Fragment() {
 
     private var _binding: ChatsFragmentBinding? = null
-
-    private lateinit var groupAdapter: GroupieAdapter
+    private lateinit var itemAdapter: ItemAdapter<ChatItem>
 
     private val binding get() = _binding!!
+    private val items = ArrayList<ChatItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         _binding = ChatsFragmentBinding.inflate(layoutInflater)
 
-        groupAdapter = GroupieAdapter()
+        itemAdapter = ItemAdapter()
+        val fastAdapter = FastAdapter.with(itemAdapter)
 
 //        createTempChats()
 
@@ -42,11 +42,9 @@ class ChatsFragment : Fragment() {
 
         binding.chatsRv.also {
             it.layoutManager = layoutManager
-            it.adapter = groupAdapter
+            it.adapter = fastAdapter
         }
     }
-
-    var updatableItems = ArrayList<ChatItem>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -78,17 +76,11 @@ class ChatsFragment : Fragment() {
                     Timber.w("Listen failed: $e")
                     return@addSnapshotListener
                 }
-                val updatingGroup = Section()
-                updatableItems.clear()
-
+                items.clear()
                 for (chat in chatsDocs!!) {
-                    updatableItems.add(ChatItem(chat.toObject()))
+                    items.add(ChatItem(chat.toObject()))
                 }
-
-                updatingGroup.update(updatableItems)
-
-                groupAdapter.update(updatingGroup)
-
+                itemAdapter.set(items)
             }
     }
 
