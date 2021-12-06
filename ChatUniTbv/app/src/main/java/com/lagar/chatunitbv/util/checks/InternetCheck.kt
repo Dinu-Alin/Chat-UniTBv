@@ -1,4 +1,4 @@
-package com.lagar.chatunitbv.util
+package com.lagar.chatunitbv.util.checks
 
 import android.content.Context
 import android.net.ConnectivityManager

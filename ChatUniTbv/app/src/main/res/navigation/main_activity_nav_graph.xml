@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_chats"
-        android:name="com.lagar.chatunitbv.fragments.chats.ChatFragment"
+        android:name="com.lagar.chatunitbv.ui.fragments.chats.ChatsFragment"
         android:label="@string/title_chats"
-        tools:layout="@layout/chat_fragment">
+        tools:layout="@layout/chats_fragment">
         <action
             android:id="@+id/action_navigation_chat_to_people"
             app:destination="@id/navigation_people" />
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/navigation_people"
-        android:name="com.lagar.chatunitbv.fragments.people.PeopleFragment"
+        android:name="com.lagar.chatunitbv.ui.fragments.people.PeopleFragment"
         android:label="@string/title_people"
         tools:layout="@layout/people_fragment" >
         <action

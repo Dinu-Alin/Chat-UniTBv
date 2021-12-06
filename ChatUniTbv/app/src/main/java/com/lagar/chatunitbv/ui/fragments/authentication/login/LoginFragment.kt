@@ -1,4 +1,4 @@
-package com.lagar.chatunitbv.fragments.authentication.login
+package com.lagar.chatunitbv.ui.fragments.authentication.login
 
 import android.content.Context
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.lagar.chatunitbv.databinding.LoginFragmentBinding
 import com.lagar.chatunitbv.firebase.autentification.Authenticator
-import com.lagar.chatunitbv.util.InternetCheck
+import com.lagar.chatunitbv.util.checks.InternetCheck
 
 
 class LoginFragment : Fragment() {

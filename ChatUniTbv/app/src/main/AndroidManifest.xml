@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChatUniTbv">
         <activity
-            android:name=".activities.LoginActivity"
+            android:name="com.lagar.chatunitbv.ui.activities.LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +19,7 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".activities.MainActivity"
+        <activity android:name="com.lagar.chatunitbv.ui.activities.MainActivity"
 
             />
 

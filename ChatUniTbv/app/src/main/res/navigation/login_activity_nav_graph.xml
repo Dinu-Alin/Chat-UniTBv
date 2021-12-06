@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_login"
-        android:name="com.lagar.chatunitbv.fragments.authentication.login.LoginFragment"
+        android:name="com.lagar.chatunitbv.ui.fragments.authentication.login.LoginFragment"
         android:label="@string/login_fragment_label"
         tools:layout="@layout/login_fragment" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_start"
-        android:name="com.lagar.chatunitbv.fragments.authentication.start.StartFragment"
+        android:name="com.lagar.chatunitbv.ui.fragments.authentication.start.StartFragment"
         android:label="@string/start_fragment_label"
         tools:layout="@layout/start_fragment">
 
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_register"
-        android:name="com.lagar.chatunitbv.fragments.authentication.register.RegisterFragment"
+        android:name="com.lagar.chatunitbv.ui.fragments.authentication.register.RegisterFragment"
         android:label="register_fragment"
         tools:layout="@layout/register_fragment" >
         <action
@@ -39,7 +39,7 @@
 
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.lagar.chatunitbv.activities.MainActivity"
+        android:name="com.lagar.chatunitbv.ui.activities.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
 </navigation>

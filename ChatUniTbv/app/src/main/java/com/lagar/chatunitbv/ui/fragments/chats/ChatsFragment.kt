@@ -1,4 +1,4 @@
-package com.lagar.chatunitbv.fragments.chats
+package com.lagar.chatunitbv.ui.fragments.chats
 
 import Operations
 import android.os.Bundle
@@ -9,18 +9,19 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
-import com.lagar.chatunitbv.databinding.ChatFragmentBinding
+import com.lagar.chatunitbv.databinding.ChatsFragmentBinding
 import com.lagar.chatunitbv.items.ChatItem
 import com.lagar.chatunitbv.models.Chat
+import com.lagar.chatunitbv.util.extensions.update
 import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.Section
 import kotlinx.coroutines.*
-import kotlinx.coroutines.tasks.await
 import timber.log.Timber
 
-class ChatFragment : Fragment() {
 
-    private var _binding: ChatFragmentBinding? = null
+class ChatsFragment : Fragment() {
+
+    private var _binding: ChatsFragmentBinding? = null
 
     private lateinit var groupAdapter: GroupieAdapter
 
@@ -29,7 +30,7 @@ class ChatFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        _binding = ChatFragmentBinding.inflate(layoutInflater)
+        _binding = ChatsFragmentBinding.inflate(layoutInflater)
 
         groupAdapter = GroupieAdapter()
 
@@ -44,6 +45,8 @@ class ChatFragment : Fragment() {
             it.adapter = groupAdapter
         }
     }
+
+    var updatableItems = ArrayList<ChatItem>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,23 +72,23 @@ class ChatFragment : Fragment() {
 
     private fun populateAdapter() {
         Operations.database.collection("chats")
-            .orderBy("time", Query.Direction.DESCENDING)
-            .get()
-            .addOnSuccessListener { chatsDocs ->
-                groupAdapter.add(Section().apply {
-                    val updatingGroup = Section()
-                    val updatableItems = ArrayList<ChatItem>()
-                    chatsDocs.documents.forEach {
-                        val chat = it.toObject<Chat>()
-                        updatableItems.add(ChatItem(chat))
-                    }
+            .orderBy("name", Query.Direction.DESCENDING)
+            .addSnapshotListener { chatsDocs, e ->
+                if (e != null) {
+                    Timber.w("Listen failed: $e")
+                    return@addSnapshotListener
+                }
+                val updatingGroup = Section()
+                updatableItems.clear()
 
-                    updatingGroup.update(updatableItems)
-                    add(updatingGroup)
-                })
-            }
-            .addOnFailureListener {
-                Timber.w("Error getting document. Error: $it")
+                for (chat in chatsDocs!!) {
+                    updatableItems.add(ChatItem(chat.toObject()))
+                }
+
+                updatingGroup.update(updatableItems)
+
+                groupAdapter.update(updatingGroup)
+
             }
     }
 

@@ -1,4 +1,4 @@
-package com.lagar.chatunitbv.activities
+package com.lagar.chatunitbv.ui.activities
 
 import android.os.Bundle
 import android.os.Handler

@@ -8,7 +8,7 @@ import com.lagar.chatunitbv.databinding.ChatItemLayoutBinding
 import com.lagar.chatunitbv.models.Chat
 import com.xwray.groupie.viewbinding.BindableItem
 
-class ChatItem(val chat: Chat?) :
+class ChatItem(private val chat: Chat?) :
     BindableItem<ChatItemLayoutBinding>() {
 
     override fun bind(binding: ChatItemLayoutBinding, position: Int) {
@@ -24,5 +24,14 @@ class ChatItem(val chat: Chat?) :
 
     override fun initializeViewBinding(view: View): ChatItemLayoutBinding =
         ChatItemLayoutBinding.bind(view)
+
+    override fun equals(other: Any?): Boolean = when (other) {
+        is ChatItem -> this.chat == other.chat
+        else -> super.equals(other)
+    }
+
+    override fun hashCode(): Int {
+        return chat?.hashCode() ?: 0
+    }
 
 }

@@ -1,4 +1,4 @@
-package com.lagar.chatunitbv.activities
+package com.lagar.chatunitbv.ui.activities
 
 import android.content.Context
 import android.content.Intent
