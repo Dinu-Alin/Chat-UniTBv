@@ -5,18 +5,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
 import com.lagar.chatunitbv.databinding.ChatsFragmentBinding
-import com.lagar.chatunitbv.items.ChatItem
-import com.lagar.chatunitbv.models.Chat
+import com.lagar.chatunitbv.ui.items.ChatItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import kotlinx.coroutines.*
 import timber.log.Timber
+import java.util.*
 
 
 class ChatsFragment : Fragment() {
@@ -34,6 +36,18 @@ class ChatsFragment : Fragment() {
 
         itemAdapter = ItemAdapter()
         fastAdapter = FastAdapter.with(itemAdapter)
+
+        fastAdapter.onClickListener = { view, adapter, item, position ->
+
+            Toast.makeText(context, "Clicked ${item.chat?.id}", Toast.LENGTH_SHORT).show()
+//
+//            Operations.db
+//                .collection("chats")
+//                .document(item.chat!!.id!!)
+//                .update("time", FieldValue.serverTimestamp())
+
+            false
+        }
         binding.chatsRv.adapter = fastAdapter
 
         attachListener()
@@ -46,14 +60,13 @@ class ChatsFragment : Fragment() {
     }
 
     private fun attachListener() {
-        Operations.database.collection("chats")
+        Operations.db.collection("chats")
             .orderBy("name", Query.Direction.DESCENDING)
             .addSnapshotListener { chatsDocsChanged, e ->
                 if (e != null) {
                     Timber.w("Chats listen error: $e")
                     return@addSnapshotListener
                 }
-
 
                 for (chatDoc in chatsDocsChanged!!.documentChanges) {
                     when (chatDoc.type) {
@@ -91,7 +104,7 @@ class ChatsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        
+
         return binding.root
     }
 

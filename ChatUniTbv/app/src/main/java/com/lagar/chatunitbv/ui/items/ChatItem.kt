@@ -1,4 +1,4 @@
-package com.lagar.chatunitbv.items
+package com.lagar.chatunitbv.ui.items
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,9 +7,11 @@ import coil.transform.CircleCropTransformation
 import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.ChatItemLayoutBinding
 import com.lagar.chatunitbv.models.Chat
+import com.lagar.chatunitbv.util.date.toCalendar
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
+import java.util.*
 
-class ChatItem(private val chat: Chat?) :
+class ChatItem(val chat: Chat?) :
     AbstractBindingItem<ChatItemLayoutBinding>() {
 
     override val type: Int
@@ -23,7 +25,13 @@ class ChatItem(private val chat: Chat?) :
     }
 
     override fun bindView(binding: ChatItemLayoutBinding, payloads: List<Any>) {
-        binding.chatLastAcessed.text = chat?.time ?: ""
+
+        val calendarTime = chat?.time?.toCalendar()
+
+        "${calendarTime?.get(Calendar.HOUR_OF_DAY)}:${calendarTime?.get(Calendar.MINUTE)}:${
+            calendarTime?.get(Calendar.SECOND)
+        }".also { binding.chatLastAcessed.text = it }
+
         binding.chatName.text = chat?.name ?: ""
 
         binding.chatPhotoRv.load(chat?.imageUrl) {

@@ -3,5 +3,5 @@ import com.google.firebase.ktx.Firebase
 
 object Operations{
 
-    val database by lazy { Firebase.firestore }
+    val db by lazy { Firebase.firestore }
 }
