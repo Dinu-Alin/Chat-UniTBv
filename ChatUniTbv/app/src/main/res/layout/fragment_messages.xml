@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/messages_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.messages.MessagesFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/messages_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/message_box"
+        tools:listitem="@layout/received_message_item_layout" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/message_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/dark_gray">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/text_input"
+            android:layout_width="360dp"
+            android:layout_height="60dp"
+            android:paddingVertical="10dp"
+            app:cardCornerRadius="20dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:cardBackgroundColor="@color/light_gray">
+                <EditText
+                    android:id="@+id/new_message_edit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginHorizontal="10dp"
+                    android:autofillHints="new message"
+                    android:background="@null"
+                    android:hint="@string/new_message"
+                    android:inputType="text"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingTop="8dp"
+                    android:textSize="19sp"
+                    android:textCursorDrawable="@drawable/default_cursor"
+                    android:textColor="@color/dark_gray"
+                    android:textColorHint="@color/dark_gray"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <!--            TODO: ADD INPUT-->
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/send"
+            android:src="@drawable/ic_baseline_send_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintCircleRadius="20dp"
+            app:layout_constraintLeft_toRightOf="@id/text_input"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/round_corners"
+            android:padding="10dp"
+            app:tint="@drawable/send_button_selector"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

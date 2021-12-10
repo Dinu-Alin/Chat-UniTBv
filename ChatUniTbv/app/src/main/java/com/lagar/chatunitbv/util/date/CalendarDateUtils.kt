@@ -149,3 +149,22 @@ fun List<Date>.isValid(min: Date? = null, max: Date? = null) = map {
         else -> true
     }
 }.all { it }
+
+fun prettyPrintDate(date: Date? = null): String {
+    if (date == null) {
+        return ""
+    }
+
+    val calendarTime = date.toCalendar()
+
+    val hour = calendarTime.get(Calendar.HOUR)
+    val minute = calendarTime.get(Calendar.MINUTE)
+    val amPm = if (calendarTime.get(Calendar.AM_PM) == 1) {
+        "pm"
+    } else {
+        "am"
+    }
+
+    return "$hour:$minute $amPm"
+
+}

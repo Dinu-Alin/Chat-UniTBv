@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.ActivityLoginBinding
 import com.lagar.chatunitbv.firebase.autentification.Authenticator.instance
 

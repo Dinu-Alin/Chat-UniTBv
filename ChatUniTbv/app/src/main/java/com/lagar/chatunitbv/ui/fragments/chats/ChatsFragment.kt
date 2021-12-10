@@ -7,11 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
+import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.ChatsFragmentBinding
 import com.lagar.chatunitbv.ui.items.ChatItem
 import com.mikepenz.fastadapter.FastAdapter
@@ -23,22 +24,21 @@ import java.util.*
 
 class ChatsFragment : Fragment() {
 
-    private lateinit var fastAdapter: FastAdapter<ChatItem>
     private var _binding: ChatsFragmentBinding? = null
-    private lateinit var itemAdapter: ItemAdapter<ChatItem>
-
     private val binding get() = _binding!!
+
+    private val itemAdapter = ItemAdapter<ChatItem>()
+    private lateinit var fastAdapter: FastAdapter<ChatItem>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         _binding = ChatsFragmentBinding.inflate(layoutInflater)
 
-        itemAdapter = ItemAdapter()
         fastAdapter = FastAdapter.with(itemAdapter)
-
-        fastAdapter.onClickListener = { view, adapter, item, position ->
-
+        fastAdapter.onClickListener = { _, _, item, _ ->
+            // view, adapter, item, position =>
             Toast.makeText(context, "Clicked ${item.chat?.id}", Toast.LENGTH_SHORT).show()
 //
 //            Operations.db
@@ -46,17 +46,17 @@ class ChatsFragment : Fragment() {
 //                .document(item.chat!!.id!!)
 //                .update("time", FieldValue.serverTimestamp())
 
+            val directions = ChatsFragmentDirections.actionNavigationChatsToMessagesActivity()
+            findNavController().navigate(directions)
+//            activity?.overridePendingTransition(R.anim.slide_in, R.anim.slide_out)
+
             false
         }
         binding.chatsRv.adapter = fastAdapter
 
         attachListener()
 
-        val layoutManager = LinearLayoutManager(context)
-
-        binding.chatsRv.also {
-            it.layoutManager = layoutManager
-        }
+        binding.chatsRv.layoutManager = LinearLayoutManager(context)
     }
 
     private fun attachListener() {

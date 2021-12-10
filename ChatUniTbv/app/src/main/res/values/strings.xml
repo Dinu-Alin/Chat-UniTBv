@@ -41,4 +41,11 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="exit">Exit</string>
     <string name="toolbar_title">Toolbar Title</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="example_time_string">10:15 AM</string>
+    <string name="long_body">Long Body</string>
+    <string name="sender">Sender</string>
+    <string name="send">Send</string>
+    <string name="new_message">New message</string>
 </resources>
