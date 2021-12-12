@@ -39,7 +39,7 @@ class ChatsFragment : Fragment() {
         fastAdapter = FastAdapter.with(itemAdapter)
         fastAdapter.onClickListener = { _, _, item, _ ->
             // view, adapter, item, position =>
-            Toast.makeText(context, "Clicked ${item.chat?.id}", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(context, "Clicked ${item.chat?.id}", Toast.LENGTH_SHORT).show()
 //
 //            Operations.db
 //                .collection("chats")

@@ -69,10 +69,12 @@
         <entry key="..\:/Users/adita/Documents/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/message_item_layout.xml" value="0.33" />
         <entry key="..\:/Users/adita/Documents/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/people_fragment.xml" value="0.38958333333333334" />
         <entry key="..\:/Users/adita/Documents/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/received_message_item_layout.xml" value="0.38958333333333334" />
+        <entry key="..\:/Users/adita/Documents/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/sent_message_item_layout.xml" value="0.33" />
+        <entry key="..\:/Users/adrian/Documents/_projects/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/fragment_messages.xml" value="0.33" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
