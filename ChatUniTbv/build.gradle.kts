@@ -9,7 +9,7 @@ buildscript {
 
     dependencies {
         val nav_version = "2.3.5"
-        classpath("com.android.tools.build:gradle:4.2.0")
+        classpath("com.android.tools.build:gradle:7.0.4")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0")
         classpath("org.jetbrains.kotlin:kotlin-android-extensions:${kotlin_version}")
         classpath("com.google.gms:google-services:4.3.4")

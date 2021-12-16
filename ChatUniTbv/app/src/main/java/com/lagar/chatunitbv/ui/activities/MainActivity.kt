@@ -1,5 +1,6 @@
 package com.lagar.chatunitbv.ui.activities
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -12,7 +13,9 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -20,6 +23,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.ActivityMainBinding
+import com.lagar.chatunitbv.ui.fragments.authentication.login.LoginFragmentDirections
+import android.content.Intent
+
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -74,6 +82,15 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavView.setupWithNavController(navController)
 
+        binding.toolbarButtonLogOut.setOnClickListener {
+            Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show();
+            val preferences =
+                this.getSharedPreferences("REMEMBER_USER", Context.MODE_PRIVATE)
+                    ?.edit()
+            preferences?.putBoolean("user", false)
+            preferences?.apply()
+            switchActivities()
+        }
     }
 
 
@@ -93,6 +110,11 @@ class MainActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             doubleBackToExitPressedOnce = false
         }, 2000)
+    }
+
+    private fun switchActivities() {
+        val switchActivityIntent = Intent(this, LoginActivity::class.java)
+        startActivity(switchActivityIntent)
     }
 
 

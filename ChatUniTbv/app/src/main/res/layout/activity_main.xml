@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:openDrawer="start"
     android:fitsSystemWindows="true"
-    tools:context=".ui.activities.MainActivity">
+    tools:context=".ui.activities.MainActivity"
+    tools:openDrawer="start">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -16,8 +15,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@menu/sliding_menu_header"
-        />
+        app:headerLayout="@menu/sliding_menu_header" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -43,20 +41,22 @@
                     android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
                     android:gravity="center"
+                    android:text="@string/toolbar_title"
                     android:textColor="@android:color/white"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:layout_alignParentStart="true"
-                    android:text="@string/toolbar_title"/>
+                    android:textStyle="bold" />
+
                 <ImageButton
-                    android:id="@+id/toolbar_button"
+                    android:id="@+id/toolbar_button_log_out"
+                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_logout_24"
-                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_alignParentEnd="true"
-                    android:contentDescription="@string/exit" />
+                    android:background="?android:selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/exit"
+                    android:src="@drawable/ic_baseline_logout_24" />
 
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
@@ -67,11 +67,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:defaultNavHost="true"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:navGraph="@navigation/main_activity_nav_graph" />
-<!--TODO ADD MESSAGES ACTIVITY-->
+        <!--TODO ADD MESSAGES ACTIVITY-->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav_view"
             android:layout_width="0dp"
@@ -85,4 +85,4 @@
             app:menu="@menu/bottom_nav_menu" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.drawerlayout.widget.DrawerLayout >
+</androidx.drawerlayout.widget.DrawerLayout>
