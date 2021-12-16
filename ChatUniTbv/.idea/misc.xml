@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.23489583333333333" />
+        <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable/round_corners.xml" value="0.3828125" />
+        <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable/send_button_selector.xml" value="0.3828125" />
+        <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable/shape_button_background_black.xml" value="0.3828125" />
         <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/activity_login.xml" value="0.21875" />
         <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/activity_main.xml" value="0.21875" />
         <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/content_login.xml" value="0.21875" />
