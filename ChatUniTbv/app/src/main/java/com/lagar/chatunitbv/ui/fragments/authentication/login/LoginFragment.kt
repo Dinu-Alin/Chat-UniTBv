@@ -73,6 +73,7 @@ class LoginFragment : Fragment() {
             if (task.isSuccessful) {
 
                 val user = auth.currentUser
+
                 val directions = LoginFragmentDirections.navigateToMainActivity()
                 rememberMe(binding.checkboxRememberMe.isChecked)
                 findNavController().navigate(directions)

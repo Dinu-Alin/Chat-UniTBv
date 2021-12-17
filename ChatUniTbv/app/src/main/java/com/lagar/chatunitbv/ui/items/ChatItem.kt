@@ -9,6 +9,7 @@ import com.lagar.chatunitbv.databinding.ChatItemLayoutBinding
 import com.lagar.chatunitbv.models.Chat
 import com.lagar.chatunitbv.util.date.prettyPrintDate
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
+import io.github.rosariopfernandes.firecoil.load
 
 class ChatItem(val chat: Chat?) :
     AbstractBindingItem<ChatItemLayoutBinding>() {
@@ -28,7 +29,9 @@ class ChatItem(val chat: Chat?) :
         binding.chatLastAcessed.text = prettyPrintDate(chat?.timestamp)
         binding.chatName.text = chat?.name ?: ""
 
-        binding.chatPhotoRv.load(chat?.imageUrl) {
+        val reference = Operations.storage.getReference("images/chats/${chat?.id}.png");
+
+        binding.chatPhotoRv.load(reference) {
             crossfade(true)
             transformations(CircleCropTransformation())
         }
