@@ -113,6 +113,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun switchActivities() {
+        this.finishAffinity()
         val switchActivityIntent = Intent(this, LoginActivity::class.java)
         startActivity(switchActivityIntent)
     }
