@@ -4,12 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.23489583333333333" />
-        <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable/round_corners.xml" value="0.3828125" />
-        <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable/send_button_selector.xml" value="0.3828125" />
-        <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable/shape_button_background_black.xml" value="0.3828125" />
         <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/activity_login.xml" value="0.21875" />
         <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/activity_main.xml" value="0.21875" />
-        <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/chats_fragment.xml" value="0.36666666666666664" />
         <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/content_login.xml" value="0.21875" />
         <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/fragment_dashboard.xml" value="0.21875" />
         <entry key="..\:/2019-2021/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/fragment_home.xml" value="0.21875" />
@@ -40,12 +36,21 @@
         <entry key="..\:/ChatUniTBv/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/login_fragment.xml" value="0.10666666666666667" />
         <entry key="..\:/ChatUniTBv/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/register_fragment.xml" value="0.1" />
         <entry key="..\:/ChatUniTBv/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/start_fragment.xml" value="0.13333333333333333" />
+        <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable/shape_button_background_black.xml" value="0.22135416666666666" />
+        <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable/shape_button_background_gray.xml" value="0.22135416666666666" />
+        <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable/shape_button_background_white.xml" value="0.22135416666666666" />
         <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/chat_fragment.xml" value="0.36666666666666664" />
         <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/content_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/fragment_messages.xml" value="0.36666666666666664" />
+        <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/fragment_reset_password.xml" value="0.29292929292929293" />
+        <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/login_fragment.xml" value="0.1" />
         <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/people_fragment.xml" value="0.36666666666666664" />
-        <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/register_fragment.xml" value="0.5" />
+        <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/register_fragment.xml" value="0.25" />
+        <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/start_fragment.xml" value="0.1" />
+        <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20520833333333333" />
+        <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/menu/sliding_menu_header.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/adita/Documents/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.40572916666666664" />
         <entry key="..\:/Users/adita/Documents/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable/default_cursor.xml" value="0.40572916666666664" />
         <entry key="..\:/Users/adita/Documents/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.40572916666666664" />

@@ -17,9 +17,10 @@ import com.lagar.chatunitbv.util.validators.FieldValidators.containsNumber
 import com.lagar.chatunitbv.util.validators.FieldValidators.isStringLowerAndUpperCase
 
 class RegisterFragment : Fragment() {
-    private var _binding : RegisterFragmentBinding? = null
+    private var _binding: RegisterFragmentBinding? = null
 
     private val binding get() = _binding!!
+
     companion object {
         var emailValid: Boolean = false
         var passwordValid: Boolean = false
@@ -40,12 +41,12 @@ class RegisterFragment : Fragment() {
         _binding = RegisterFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.goToLoginButton.setOnClickListener{
+        binding.goToLoginButton.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_register_to_navigation_login)
 
         }
 
-        setupListeners();
+        setupListeners()
         return root
     }
 
@@ -144,10 +145,18 @@ class RegisterFragment : Fragment() {
             }
             if (emailValid && passwordValid && confirmPasswordValid) {
                 binding.buttonSingUp.isEnabled = true
-                binding.buttonSingUp.background = ResourcesCompat.getDrawable(resources, R.drawable.shape_button_background_black, null)
+                binding.buttonSingUp.background = ResourcesCompat.getDrawable(
+                    resources,
+                    R.drawable.shape_button_background_black,
+                    null
+                )
             } else {
                 binding.buttonSingUp.isEnabled = false
-                binding.buttonSingUp.background = ResourcesCompat.getDrawable(resources, R.drawable.shape_button_background_gray, null)
+                binding.buttonSingUp.background = ResourcesCompat.getDrawable(
+                    resources,
+                    R.drawable.shape_button_background_gray,
+                    null
+                )
             }
         }
     }

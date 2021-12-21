@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.LoginFragmentBinding
 import com.lagar.chatunitbv.firebase.autentification.Authenticator
 import com.lagar.chatunitbv.util.checks.InternetCheck
@@ -60,6 +61,13 @@ class LoginFragment : Fragment() {
                 ).show()
             }
         }
+
+
+        binding.resetPasswordButton.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_login_to_resetPasswordFragment)
+
+        }
+
 
         return binding.root
     }

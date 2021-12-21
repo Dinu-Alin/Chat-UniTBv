@@ -13,7 +13,7 @@
         <item name="android:background">@drawable/shape_button_background_white</item>
     </style>
     <style name="GreyButton" parent="android:Widget.Button">
-        <item name="android:background">@drawable/shape_button_background_white</item>
+        <item name="android:background">@drawable/shape_button_background_gray</item>
     </style>
     <style name="MyOverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="android:tint">@color/white</item>

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/navigate_to_main_activity"
             app:destination="@id/mainActivity" />
+        <action
+            android:id="@+id/action_navigation_login_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_start"
@@ -42,4 +45,9 @@
         android:name="com.lagar.chatunitbv.ui.activities.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="com.lagar.chatunitbv.ui.fragments.authentication.resetpassword.ResetPasswordFragment"
+        android:label="fragment_reset_password"
+        tools:layout="@layout/fragment_reset_password" />
 </navigation>

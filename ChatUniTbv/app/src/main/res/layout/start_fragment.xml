@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.authentication.start.StartFragment">
 
 
@@ -23,10 +23,10 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/unitbv_logo"
                 android:src="@drawable/logo_unitbv"
                 app:layout_constraintBottom_toTopOf="@id/layout_buttons"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/unitbv_logo" />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,7 +39,7 @@
 
                 <Button
                     android:id="@+id/button_log_in"
-                    style="@style/WhiteButton"
+                    style="@style/BlackButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
