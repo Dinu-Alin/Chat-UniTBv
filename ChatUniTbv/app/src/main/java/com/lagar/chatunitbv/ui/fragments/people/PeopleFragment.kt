@@ -68,11 +68,12 @@ class PeopleFragment : Fragment(), ItemFilterListener<PeopleItem> {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(s: String): Boolean {
+                itemAdapter.itemFilter.filter(s)
                 return false
             }
 
             override fun onQueryTextChange(s: String): Boolean {
-                itemAdapter.filter(s)
+                itemAdapter.itemFilter.filter(s)
                 return false
             }
         })
@@ -120,8 +121,7 @@ class PeopleFragment : Fragment(), ItemFilterListener<PeopleItem> {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
+    ): View {
         return binding.root
     }
 
@@ -131,11 +131,10 @@ class PeopleFragment : Fragment(), ItemFilterListener<PeopleItem> {
     }
 
     override fun itemsFiltered(constraint: CharSequence?, results: List<PeopleItem>?) {
-        TODO("Not yet implemented")
+//        Toast.makeText(context, "filtered items count: " + itemAdapter.adapterItemCount, Toast.LENGTH_SHORT).show()
     }
 
     override fun onReset() {
-        TODO("Not yet implemented")
+        itemAdapter.clear()
     }
-
 }
