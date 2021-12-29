@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -50,7 +51,7 @@ class PeopleFragment : Fragment(), ItemFilterListener<PeopleItem> {
 
             false
         }
-        binding.chatsRv.adapter = fastAdapter
+        binding.peopleRv.adapter = fastAdapter
 
         attachListener()
         itemAdapter.itemFilter.filterPredicate = {item: PeopleItem, constraint: CharSequence? ->
@@ -62,8 +63,19 @@ class PeopleFragment : Fragment(), ItemFilterListener<PeopleItem> {
                 )
         }
         itemAdapter.itemFilter.itemFilterListener = this
+        val searchView = binding.peopleSearch
+        binding.peopleRv.layoutManager = LinearLayoutManager(context)
 
-        binding.chatsRv.layoutManager = LinearLayoutManager(context)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(s: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(s: String): Boolean {
+                itemAdapter.filter(s)
+                return false
+            }
+        })
     }
     private fun attachListener() {
         Operations.db.collection("users")
