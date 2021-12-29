@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/people_item">
+
+    <ImageView
+        android:id="@+id/people_photo_rv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_baseline_person_24"
+        android:contentDescription="@string/user_image"
+        android:layout_margin="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/people_photo_rv"
+        app:layout_constraintLeft_toRightOf="@id/people_photo_rv"
+        app:layout_constraintBottom_toBottomOf="@id/people_photo_rv"
+        android:layout_margin="10dp"
+        android:maxWidth="280dp">
+        <TextView
+            android:id="@+id/people_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Student's name"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:maxWidth="200dp"
+            android:textColor="@color/black"
+            />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
