@@ -49,6 +49,8 @@ dependencies {
     implementation("com.google.firebase:firebase-messaging:23.0.0")
     implementation("androidx.work:work-runtime:2.7.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation ("io.grpc:grpc-okhttp:1.32.2")
+
     val kotlin_version = "1.5.20"
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}")
     implementation("androidx.core:core-ktx:1.7.0")
