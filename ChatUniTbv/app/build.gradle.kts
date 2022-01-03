@@ -61,8 +61,8 @@ dependencies {
     //firebase
     implementation(platform("com.google.firebase:firebase-bom:28.0.1"))
     implementation("com.google.firebase:firebase-auth-ktx")
-    implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-storage-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.github.rosariopfernandes:firecoil:0.3.0")
 
 
@@ -107,6 +107,7 @@ dependencies {
     implementation("com.mikepenz:fastadapter-extensions-swipe:${latestFastAdapterRelease}")// swipe support
     implementation("com.mikepenz:fastadapter-extensions-ui:${latestFastAdapterRelease}")// pre-defined ui components
     implementation("com.mikepenz:fastadapter-extensions-utils:${latestFastAdapterRelease}")// needs the `expandable`, `drag` and `scroll` extension.
+    implementation(kotlin("reflect"))
 
 
 }

@@ -22,12 +22,15 @@
 
     <fragment
         android:id="@+id/navigation_people"
-        android:name="com.lagar.chatunitbv.ui.fragments.people.PeopleFragment"
+        android:name="com.lagar.chatunitbv.ui.fragments.users.UsersFragment"
         android:label="people_fragment"
-        tools:layout="@layout/people_fragment" >
+        tools:layout="@layout/users_fragment" >
         <action
             android:id="@+id/action_peopleFragment_to_navigation_chats"
             app:destination="@id/navigation_chats" />
+        <action
+            android:id="@+id/action_navigation_people_to_messagesActivity"
+            app:destination="@id/messagesActivity" />
     </fragment>
     <activity
         android:id="@+id/messagesActivity"

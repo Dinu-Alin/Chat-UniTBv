@@ -1,23 +1,17 @@
 package com.lagar.chatunitbv.ui.fragments.authentication.start
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.StartFragmentBinding
 
 class StartFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = StartFragment()
-    }
-
-    private lateinit var viewModel: StartViewModel
     private var _binding: StartFragmentBinding? = null
     private val binding get() = _binding!!
 
@@ -25,8 +19,6 @@ class StartFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel =
-            ViewModelProvider(this).get(StartViewModel::class.java)
 
         _binding = StartFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -40,11 +32,4 @@ class StartFragment : Fragment() {
         }
         return root
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(StartViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }

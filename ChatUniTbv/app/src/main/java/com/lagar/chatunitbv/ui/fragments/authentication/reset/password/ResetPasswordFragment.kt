@@ -1,31 +1,23 @@
-package com.lagar.chatunitbv.ui.fragments.authentication.resetpassword
+package com.lagar.chatunitbv.ui.fragments.authentication.reset.password
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.lifecycle.ViewModelProvider
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
 import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.FragmentResetPasswordBinding
-import com.lagar.chatunitbv.databinding.StartFragmentBinding
-import com.lagar.chatunitbv.firebase.autentification.Authenticator
-import com.lagar.chatunitbv.ui.fragments.authentication.login.LoginFragmentDirections
+import com.lagar.chatunitbv.firebase.Operations
 import com.lagar.chatunitbv.ui.fragments.authentication.register.RegisterFragment
-import com.lagar.chatunitbv.ui.fragments.authentication.start.StartViewModel
 import com.lagar.chatunitbv.util.checks.InternetCheck
 import com.lagar.chatunitbv.util.validators.FieldValidators
 
 
 class ResetPasswordFragment : Fragment() {
-
-    private lateinit var viewModel: ResetPasswordViewModel
 
     private var _binding: FragmentResetPasswordBinding? = null
     private val binding get() = _binding!!
@@ -34,8 +26,6 @@ class ResetPasswordFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel =
-            ViewModelProvider(this).get(ResetPasswordViewModel::class.java)
         _binding = FragmentResetPasswordBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -107,7 +97,7 @@ class ResetPasswordFragment : Fragment() {
 
     private fun resetPassword(email: String) {
 
-        val auth = Authenticator.instance
+        val auth = Operations.auth
 
         auth.sendPasswordResetEmail(email).addOnCompleteListener { task ->
             binding.emailLayout.isErrorEnabled = false
@@ -138,9 +128,5 @@ class ResetPasswordFragment : Fragment() {
             binding.emailLayout.isErrorEnabled = false
         }
         return true
-    }
-
-    companion object {
-        fun newInstance() = ResetPasswordFragment()
     }
 }

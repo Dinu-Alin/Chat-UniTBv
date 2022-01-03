@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.firestore.ktx.toObject
 import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.LoginFragmentBinding
-import com.lagar.chatunitbv.firebase.autentification.Authenticator
+import com.lagar.chatunitbv.firebase.Operations
+import com.lagar.chatunitbv.models.User
+import com.lagar.chatunitbv.preferences.UserSharedPreferencesRepository
 import com.lagar.chatunitbv.util.checks.InternetCheck
 
 
@@ -20,14 +22,6 @@ class LoginFragment : Fragment() {
     private var _binding: LoginFragmentBinding? = null
 
     private val binding get() = _binding!!
-
-    companion object {
-        private const val TAG = "EmailPassword"
-
-        fun newInstance() = LoginFragment()
-    }
-
-    private lateinit var viewModel: LoginViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,16 +69,26 @@ class LoginFragment : Fragment() {
 
     private fun signIn(email: String, password: String) {
 
-        val auth = Authenticator.instance
+        val auth = Operations.auth
 
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
 
-                val user = auth.currentUser
+                val authUser = auth.currentUser
 
-                val directions = LoginFragmentDirections.navigateToMainActivity()
-                rememberMe(binding.checkboxRememberMe.isChecked)
-                findNavController().navigate(directions)
+                Operations.db.collection("users").document(authUser?.email.toString()).get()
+                    .addOnSuccessListener {
+                        val user = it.toObject<User>()!!
+                        val sharedPreferences = UserSharedPreferencesRepository(
+                            this.requireActivity()
+                                .getSharedPreferences("USER", Context.MODE_PRIVATE)
+                        )
+                        sharedPreferences.write(user)
+
+                        val directions = LoginFragmentDirections.navigateToMainActivity()
+                        rememberMe(binding.checkboxRememberMe.isChecked)
+                        findNavController().navigate(directions)
+                    }
             } else {
                 Toast.makeText(
                     context, "Authentication failed.",
@@ -96,23 +100,12 @@ class LoginFragment : Fragment() {
 
     }
 
-
     private fun rememberMe(checked: Boolean) {
         val preferences =
             this.activity?.getSharedPreferences("REMEMBER_USER", Context.MODE_PRIVATE)
                 ?.edit()
         preferences?.putBoolean("user", checked)
         preferences?.apply()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-        // TODO: Use the ViewModel
     }
 
 }

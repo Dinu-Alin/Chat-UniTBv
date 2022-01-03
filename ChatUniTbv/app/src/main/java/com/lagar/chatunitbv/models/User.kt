@@ -1,13 +1,12 @@
 package com.lagar.chatunitbv.models
 
+import com.google.firebase.firestore.DocumentId
+
 data class User(
-    var name: String? = null,
-    var id: String? = null,
-    var data: UserData? = null
-) {
-    fun toMap(): Map<String, Any?> {
-        return mapOf(
-            "name" to name
-        )
-    }
-}
+   @DocumentId
+   val email: String? = null,
+   val name: String? = null,
+   val group: String? = null,
+   val gender: String? = null
+)
+

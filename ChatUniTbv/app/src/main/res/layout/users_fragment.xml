@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.people.PeopleFragment">
+    tools:context=".ui.fragments.users.UsersFragment">
     <androidx.appcompat.widget.SearchView
         android:id="@+id/people_search"
         android:layout_width="match_parent"
@@ -19,9 +19,9 @@
         />
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/people_search"
-
+        app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/peopleRv"
         tools:listitem="@layout/people_item_layout"
         />

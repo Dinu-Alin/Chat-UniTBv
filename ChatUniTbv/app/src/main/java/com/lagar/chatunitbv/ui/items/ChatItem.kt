@@ -6,6 +6,7 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.ChatItemLayoutBinding
+import com.lagar.chatunitbv.firebase.Operations
 import com.lagar.chatunitbv.models.Chat
 import com.lagar.chatunitbv.util.date.prettyPrintDate
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
@@ -29,7 +30,7 @@ class ChatItem(val chat: Chat?) :
         binding.chatLastAcessed.text = prettyPrintDate(chat?.timestamp)
         binding.chatName.text = chat?.name ?: ""
 
-        val reference = Operations.storage.getReference("images/chats/${chat?.id}.png");
+        val reference = Operations.store.getReference("images/chats/${chat?.id}.png");
 
         binding.chatPhotoRv.load(reference) {
             crossfade(true)

@@ -47,7 +47,7 @@
         tools:layout="@layout/activity_main" />
     <fragment
         android:id="@+id/resetPasswordFragment"
-        android:name="com.lagar.chatunitbv.ui.fragments.authentication.resetpassword.ResetPasswordFragment"
+        android:name="com.lagar.chatunitbv.ui.fragments.authentication.reset.password.ResetPasswordFragment"
         android:label="fragment_reset_password"
         tools:layout="@layout/fragment_reset_password" />
 </navigation>

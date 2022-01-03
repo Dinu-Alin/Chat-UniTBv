@@ -13,7 +13,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 
 import androidx.navigation.ui.AppBarConfiguration
@@ -23,10 +22,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.ActivityMainBinding
-import com.lagar.chatunitbv.ui.fragments.authentication.login.LoginFragmentDirections
 import android.content.Intent
-
-
+import android.widget.ImageView
+import coil.transform.CircleCropTransformation
+import com.google.firebase.firestore.ktx.toObject
+import com.lagar.chatunitbv.firebase.Operations
+import com.lagar.chatunitbv.models.Group
+import com.lagar.chatunitbv.models.User
+import com.lagar.chatunitbv.preferences.UserSharedPreferencesRepository
+import io.github.rosariopfernandes.firecoil.load
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,19 +38,30 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var title: TextView
+    private lateinit var user: User
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val sharedPreferences = UserSharedPreferencesRepository(
+            this.getSharedPreferences("USER", MODE_PRIVATE)
+        )
+        user = sharedPreferences.read()
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
         title = findViewById(R.id.toolbar_title)
         val bottomNavView: BottomNavigationView = binding.bottomNavView
+
         drawerLayout = findViewById(R.id.drawerLayout)
+
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         val navigationView: NavigationView = findViewById(R.id.nav_view)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+
         val navController: NavController = navHostFragment.navController
         val toggle = ActionBarDrawerToggle(
             this,
@@ -83,16 +98,47 @@ class MainActivity : AppCompatActivity() {
         bottomNavView.setupWithNavController(navController)
 
         binding.toolbarButtonLogOut.setOnClickListener {
-            Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show();
-            val preferences =
-                this.getSharedPreferences("REMEMBER_USER", Context.MODE_PRIVATE)
-                    ?.edit()
+            Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
+            val preferences = this
+                .getSharedPreferences("REMEMBER_USER", Context.MODE_PRIVATE)
+                ?.edit()
             preferences?.putBoolean("user", false)
             preferences?.apply()
+
+            val userSharedPreferences = this
+                .getSharedPreferences("USER", Context.MODE_PRIVATE)
+                ?.edit()
+                ?.clear()
+            userSharedPreferences?.apply()
+
             switchActivities()
         }
+
+        Operations.db.collection("groups").document("${user.group}").get()
+            .addOnSuccessListener {
+                val group = it.toObject<Group>()
+                setupUserData(group)
+            }
     }
 
+    private fun setupUserData(group: Group?) {
+//      Toast.makeText(this, "User logged:${user.email} ${user.name}", Toast.LENGTH_LONG).show()
+        val profilePicture: ImageView = findViewById(R.id.profile_image)
+        val profileName: TextView = findViewById(R.id.profile_name)
+        val profileField: TextView = findViewById(R.id.profile_field)
+        val profileGroup: TextView = findViewById(R.id.profile_group)
+
+        val reference = Operations.store.getReference("images/users/${user.email}.jpg");
+
+        profilePicture.load(reference) {
+            crossfade(true)
+            transformations(CircleCropTransformation())
+        }
+
+        profileName.text = user.name.toString()
+        profileField.text = group?.specialisation.toString()
+        profileGroup.text = user.group.toString()
+    }
 
 
     private var doubleBackToExitPressedOnce = false
@@ -114,9 +160,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun switchActivities() {
         this.finishAffinity()
-        val switchActivityIntent = Intent(this, LoginActivity::class.java)
+        val switchActivityIntent = Intent(this, StartActivity::class.java)
         startActivity(switchActivityIntent)
     }
-
-
 }

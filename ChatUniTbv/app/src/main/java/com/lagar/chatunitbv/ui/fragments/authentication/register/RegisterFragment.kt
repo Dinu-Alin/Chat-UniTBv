@@ -1,6 +1,5 @@
 package com.lagar.chatunitbv.ui.fragments.authentication.register
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -25,14 +24,7 @@ class RegisterFragment : Fragment() {
         var emailValid: Boolean = false
         var passwordValid: Boolean = false
         var confirmPasswordValid: Boolean = false
-
-        const val TAG = "RegisterEmailPassword"
-
-        @JvmStatic
-        fun newInstance() = RegisterFragment()
     }
-
-    private lateinit var viewModel: RegisterViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,12 +40,6 @@ class RegisterFragment : Fragment() {
 
         setupListeners()
         return root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
     private fun validateEmail(): Boolean {
@@ -160,5 +146,5 @@ class RegisterFragment : Fragment() {
             }
         }
     }
-
+    // TODO add user shared preferences as in LoginFragment
 }

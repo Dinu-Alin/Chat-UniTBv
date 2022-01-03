@@ -72,7 +72,6 @@
             app:layout_constraintBottom_toTopOf="@id/bottom_nav_view"
             app:navGraph="@navigation/main_activity_nav_graph"
             android:layout_height="0dp"/>
-        <!--TODO ADD MESSAGES ACTIVITY-->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav_view"
             android:layout_width="0dp"

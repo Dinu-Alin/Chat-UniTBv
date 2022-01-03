@@ -1,6 +1,5 @@
-package com.lagar.chatunitbv.ui.fragments.people
+package com.lagar.chatunitbv.ui.fragments.users
 
-import Operations
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,38 +13,39 @@ import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
-import com.lagar.chatunitbv.databinding.PeopleFragmentBinding
+import com.lagar.chatunitbv.databinding.UsersFragmentBinding
+import com.lagar.chatunitbv.firebase.Operations
 import com.lagar.chatunitbv.ui.fragments.chats.ChatsFragmentDirections
-import com.lagar.chatunitbv.ui.items.PeopleItem
+import com.lagar.chatunitbv.ui.items.UserItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.listeners.ItemFilterListener
 import timber.log.Timber
 import java.util.*
 
-class PeopleFragment : Fragment(), ItemFilterListener<PeopleItem> {
-    private var _binding: PeopleFragmentBinding? = null
+class UsersFragment : Fragment(), ItemFilterListener<UserItem> {
+    private var _binding: UsersFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private val itemAdapter = ItemAdapter<PeopleItem>()
-    private lateinit var fastAdapter: FastAdapter<PeopleItem>
+    private val itemAdapter = ItemAdapter<UserItem>()
+    private lateinit var fastAdapter: FastAdapter<UserItem>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        _binding = PeopleFragmentBinding.inflate(layoutInflater)
+        _binding = UsersFragmentBinding.inflate(layoutInflater)
 
         fastAdapter = FastAdapter.with(itemAdapter)
         fastAdapter.onClickListener = { _, _, item, _ ->
-            Toast.makeText(context, "Clicked ${item.people?.name}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Clicked ${item.user?.name}", Toast.LENGTH_SHORT).show()
 
             Operations.db
                 .collection("chats")
-                .document(item.people!!.id!!)
+                .document(item.user!!.email!!)
                 .update("time", FieldValue.serverTimestamp())
 
-            val directions = ChatsFragmentDirections.actionNavigationChatsToMessagesActivity()
+            val directions = UsersFragmentDirections.actionNavigationPeopleToMessagesActivity()
             findNavController().navigate(directions)
 //            activity?.overridePendingTransition(R.anim.slide_in, R.anim.slide_out)
 
@@ -54,8 +54,8 @@ class PeopleFragment : Fragment(), ItemFilterListener<PeopleItem> {
         binding.peopleRv.adapter = fastAdapter
 
         attachListener()
-        itemAdapter.itemFilter.filterPredicate = {item: PeopleItem, constraint: CharSequence? ->
-            item.people?.name.toString().lowercase(Locale.getDefault())
+        itemAdapter.itemFilter.filterPredicate = { item: UserItem, constraint: CharSequence? ->
+            item.user?.name.toString().lowercase(Locale.getDefault())
                 .contains(
                     constraint.toString().lowercase(
                         Locale.getDefault()
@@ -78,6 +78,7 @@ class PeopleFragment : Fragment(), ItemFilterListener<PeopleItem> {
             }
         })
     }
+
     private fun attachListener() {
         Operations.db.collection("users")
             .orderBy("name", Query.Direction.ASCENDING)
@@ -91,7 +92,10 @@ class PeopleFragment : Fragment(), ItemFilterListener<PeopleItem> {
                     when (peopleDoc.type) {
                         DocumentChange.Type.ADDED -> {
                             Timber.d("People document added: ${peopleDoc.document.data}")
-                            itemAdapter.add(peopleDoc.newIndex, PeopleItem(peopleDoc.document.toObject()))
+                            itemAdapter.add(
+                                peopleDoc.newIndex,
+                                UserItem(peopleDoc.document.toObject())
+                            )
                         }
                         DocumentChange.Type.REMOVED -> {
                             Timber.d("People document removed: ${peopleDoc.document.data}")
@@ -105,11 +109,11 @@ class PeopleFragment : Fragment(), ItemFilterListener<PeopleItem> {
 
                                 itemAdapter.add(
                                     peopleDoc.newIndex,
-                                    PeopleItem(peopleDoc.document.toObject())
+                                    UserItem(peopleDoc.document.toObject())
                                 )
                             } else {
                                 itemAdapter[peopleDoc.newIndex] =
-                                    PeopleItem(peopleDoc.document.toObject())
+                                    UserItem(peopleDoc.document.toObject())
                             }
 
                         }
@@ -117,6 +121,7 @@ class PeopleFragment : Fragment(), ItemFilterListener<PeopleItem> {
                 }
             }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -130,7 +135,7 @@ class PeopleFragment : Fragment(), ItemFilterListener<PeopleItem> {
         _binding = null
     }
 
-    override fun itemsFiltered(constraint: CharSequence?, results: List<PeopleItem>?) {
+    override fun itemsFiltered(constraint: CharSequence?, results: List<UserItem>?) {
 //        Toast.makeText(context, "filtered items count: " + itemAdapter.adapterItemCount, Toast.LENGTH_SHORT).show()
     }
 

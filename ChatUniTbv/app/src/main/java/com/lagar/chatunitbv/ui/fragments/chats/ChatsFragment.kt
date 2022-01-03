@@ -1,19 +1,17 @@
 package com.lagar.chatunitbv.ui.fragments.chats
 
-import Operations
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
-import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.ChatsFragmentBinding
+import com.lagar.chatunitbv.firebase.Operations
 import com.lagar.chatunitbv.ui.items.ChatItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
