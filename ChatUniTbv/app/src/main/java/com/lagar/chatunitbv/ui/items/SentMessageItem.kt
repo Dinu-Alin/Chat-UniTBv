@@ -11,16 +11,11 @@ import com.mikepenz.fastadapter.binding.AbstractBindingItem
 open class SentMessageItem(val message: Message?) :
     AbstractBindingItem<SentMessageItemLayoutBinding>() {
 
-    private var _binding: SentMessageItemLayoutBinding? = null
-    val viewBinding get() = _binding!!
-
     override fun createBinding(
         inflater: LayoutInflater,
         parent: ViewGroup?
     ): SentMessageItemLayoutBinding {
-
-        _binding = SentMessageItemLayoutBinding.inflate(inflater, parent, false)
-        return viewBinding
+        return SentMessageItemLayoutBinding.inflate(inflater, parent, false)
     }
 
     override val type: Int = R.id.sent_message_full

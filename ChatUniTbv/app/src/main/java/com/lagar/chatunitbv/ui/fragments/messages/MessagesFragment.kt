@@ -35,18 +35,6 @@ class MessagesFragment : Fragment() {
 
         fastAdapter = FastAdapter.with(itemAdapter)
 
-        fastAdapter.onClickListener = { _, _, item, _ ->
-            // view, adapter, item, position =>
-
-            if (lastClicked != null) {
-                lastClicked!!.viewBinding.sentMessageDate.visibility = View.GONE
-            }
-            item.viewBinding.sentMessageDate.visibility = View.VISIBLE
-            lastClicked = item
-
-            false
-        }
-
         binding.messagesRv.adapter = fastAdapter
         binding.sendButton.setOnClickListener {
 //            Toast.makeText(context, "Sent!${binding.newMessageEditText.text}", Toast.LENGTH_SHORT)
