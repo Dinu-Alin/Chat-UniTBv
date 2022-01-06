@@ -68,21 +68,6 @@ class MessagesFragment : Fragment() {
                     )
                 )
 
-                // query last message, so we get the timestamp
-                chatRef
-                    .collection("messages")
-                    .orderBy("timestamp", Query.Direction.ASCENDING)
-                    .limit(1)
-                    .get()
-                    .addOnCompleteListener {
-                        val querySnapshot = it.result
-                        if (!querySnapshot!!.isEmpty) {
-                            val lastMessage = querySnapshot.documents[0].toObject<Message>()
-                            // then we update the chat's timestamp
-                            updateChatTimestamp(lastMessage!!.timestamp!!)
-                        }
-                    }
-
                 binding.newMessageEditText.text.clear()
                 if (itemAdapter.itemList.size() >= 1) {
                     binding.messagesRv.smoothScrollToPosition(itemAdapter.itemList.size() - 1)
@@ -91,14 +76,10 @@ class MessagesFragment : Fragment() {
         }
         attachListener()
 
-        binding.messagesRv.layoutManager = LinearLayoutManager(context)
-    }
-
-    private fun updateChatTimestamp(timestamp: Date) {
-        Operations.db
-            .collection("chats")
-            .document(chat.id!!)
-            .update("timestamp", timestamp)
+        val layoutManager = LinearLayoutManager(context)
+        layoutManager.reverseLayout = false
+        layoutManager.stackFromEnd = true
+        binding.messagesRv.layoutManager = layoutManager
     }
 
     private fun attachListener() {
@@ -156,7 +137,9 @@ class MessagesFragment : Fragment() {
                 }
                 // scroll to last message
                 if (itemAdapter.itemList.size() >= 1) {
-                    binding.messagesRv.scrollToPosition(itemAdapter.itemList.size() - 1)
+                    if (_binding != null) {
+                        binding.messagesRv.scrollToPosition(itemAdapter.itemList.size() - 1)
+                    }
                 }
             }
     }
@@ -173,11 +156,6 @@ class MessagesFragment : Fragment() {
     ): View {
 
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        Toast.makeText(activity, chat.id, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

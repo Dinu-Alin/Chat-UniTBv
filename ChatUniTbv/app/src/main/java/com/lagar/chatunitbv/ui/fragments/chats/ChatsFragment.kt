@@ -63,12 +63,17 @@ class ChatsFragment : Fragment() {
         }
         binding.chatsRv.adapter = fastAdapter
 
-        attachListener()
+        attachChatListener()
+        attachMessagesListener()
 
         binding.chatsRv.layoutManager = LinearLayoutManager(context)
     }
 
-    private fun attachListener() {
+    private fun attachMessagesListener() {
+        Operations.db.collection("chats")
+    }
+
+    private fun attachChatListener() {
         Operations.db.collection("chats")
             .whereArrayContains("members", user.email!!)
             .orderBy("timestamp", Query.Direction.DESCENDING)

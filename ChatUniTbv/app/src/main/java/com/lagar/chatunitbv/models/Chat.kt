@@ -14,6 +14,5 @@ data class Chat(
     var name: String? = null,
     var members: List<String?>? = null,
     var memberCount: Int? = null,
-    @ServerTimestamp
     var timestamp: Date? = null
 ) : Parcelable
