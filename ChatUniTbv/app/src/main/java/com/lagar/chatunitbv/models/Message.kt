@@ -8,7 +8,7 @@ data class Message(
     @DocumentId
     val id: String? = null,
     val sender: String? = null,
-    var content: String? = null,
+    val content: String? = null,
     @ServerTimestamp
-    var timestamp: Date? = null
+    val timestamp: Date? = null
 )
