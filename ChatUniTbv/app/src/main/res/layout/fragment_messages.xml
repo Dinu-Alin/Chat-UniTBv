@@ -7,12 +7,52 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.messages.MessagesFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/chat_bar"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:background="@color/dark_gray"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/chat_photo"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/ic_baseline_person_24"
+            android:contentDescription="@string/user_image"
+            android:layout_margin="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/chat_photo"
+            app:layout_constraintLeft_toRightOf="@id/chat_photo"
+            app:layout_constraintBottom_toBottomOf="@id/chat_photo"
+            android:layout_margin="10dp"
+            android:maxWidth="280dp">
+            <TextView
+                android:id="@+id/chat_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Informatica"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:maxWidth="200dp"
+                android:textColor="@color/white"
+                />
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/messages_rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chat_bar"
         app:layout_constraintBottom_toTopOf="@id/message_box"
         tools:listitem="@layout/received_message_item_layout" />
 

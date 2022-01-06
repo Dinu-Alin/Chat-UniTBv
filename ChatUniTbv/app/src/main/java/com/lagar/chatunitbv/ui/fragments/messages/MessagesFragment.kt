@@ -9,9 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
+import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.FragmentMessagesBinding
 import com.lagar.chatunitbv.firebase.Operations
 import com.lagar.chatunitbv.models.Chat
@@ -19,11 +22,13 @@ import com.lagar.chatunitbv.models.Message
 import com.lagar.chatunitbv.models.User
 import com.lagar.chatunitbv.preferences.UserSharedPreferencesRepository
 import com.lagar.chatunitbv.ui.activities.MessagesActivity
+import com.lagar.chatunitbv.ui.items.ChatItem
 import com.lagar.chatunitbv.ui.items.ReceivedMessageItem
 import com.lagar.chatunitbv.ui.items.SentMessageItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
+import io.github.rosariopfernandes.firecoil.load
 import timber.log.Timber
 import java.util.*
 
@@ -52,7 +57,40 @@ class MessagesFragment : Fragment() {
         _binding = FragmentMessagesBinding.inflate(layoutInflater)
 
         fastAdapter = FastAdapter.with(itemAdapter)
+        if (chat.memberCount == 2) {
+            val otherUserEmail =
+                chat.members!!.first { email -> email != user.email }
 
+            var reference = Operations.store.getReference("images/users/${otherUserEmail}.jpg")
+
+            reference.downloadUrl.addOnSuccessListener {
+                binding.chatPhoto.load(reference) {
+                    placeholder(R.drawable.ic_baseline_person_24)
+                    transformations(CircleCropTransformation())
+                }
+                chat.image = "images/users/${otherUserEmail}.jpg"
+            }
+                .addOnFailureListener {
+                    reference = Operations.store.getReference("images/avatar.jpg")
+
+                    binding.chatPhoto.load(reference) {
+                        transformations(CircleCropTransformation())
+                    }
+                }
+
+        } else {
+            val reference = chat.image?.let { Operations.store.getReference(it) }
+
+            if (reference != null) {
+                binding.chatPhoto.load(reference) {
+                    //  crossfade(true)
+                    //                placeholder(R.drawable.ic_baseline_person_24)
+                    transformations(CircleCropTransformation())
+                }
+            }
+        }
+
+        binding.chatName.text = chat.name
         binding.messagesRv.adapter = fastAdapter
         binding.sendButton.setOnClickListener {
 //            Toast.makeText(context, "Sent!${binding.newMessageEditText.text}", Toast.LENGTH_SHORT)

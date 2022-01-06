@@ -153,14 +153,12 @@ class MainActivity : AppCompatActivity() {
                 FirebaseStorage.getInstance().getReference("images/users/${user.email}.jpg")
             storageReference.putFile(imageUri).addOnSuccessListener {
                 profilePicture.load(imageUri) {
-                    crossfade(true)
                     transformations(CircleCropTransformation())
                 }
             }.addOnFailureListener {
 
             }
             profilePicture.load(imageUri) {
-                crossfade(true)
                 transformations(CircleCropTransformation())
             }
 
@@ -175,11 +173,21 @@ class MainActivity : AppCompatActivity() {
         val profileGroup: TextView = findViewById(R.id.profile_group)
 
         val reference = Operations.store.getReference("images/users/${user.email}.jpg");
+        val avatar = Operations.store.getReference("images/avatar.jpg")
 
-        profilePicture.load(reference) {
-            crossfade(true)
-            transformations(CircleCropTransformation())
+        reference.downloadUrl.addOnSuccessListener {
+            profilePicture.load(reference) {
+                crossfade(true)
+                transformations(CircleCropTransformation())
+            }
         }
+            .addOnFailureListener {
+                profilePicture.load(avatar) {
+                    transformations(CircleCropTransformation())
+                }
+            }
+
+
 
         profileName.text = user.name.toString()
         profileField.text = group?.specialisation.toString()

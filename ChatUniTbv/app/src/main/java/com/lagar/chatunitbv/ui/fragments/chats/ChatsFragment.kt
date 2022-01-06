@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.transform.CircleCropTransformation
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
@@ -131,23 +132,34 @@ class ChatsFragment : Fragment() {
 
                             Timber.d("Chat document added: ${chatDoc.document.data}")
                             val chat = chatDoc.document.toObject<Chat>()
-
+                            var otherImage =""
                             // ================================================================
                             if (chat.memberCount == 2) {
                                 val otherUserEmail =
                                     chat.members!!.first { email -> email != user.email }
+                                if (otherUserEmail != null) {
+                                    otherImage = otherUserEmail
+                                }
 
-                                chat.image = "images/users/${otherUserEmail}.jpg"
+                                val reference =
+                                    Operations.store.getReference("images/users/${otherUserEmail}.jpg")
+
+                                reference.downloadUrl.addOnSuccessListener {
+                                    chat.image = "images/users/${otherUserEmail}.jpg"
+                                }
+                                    .addOnFailureListener {
+                                        chat.image = "images/avatar.jpg"
+                                    }
                                 Operations.db.collection("users").document(otherUserEmail!!).get()
                                     .addOnSuccessListener {
                                         chat.name = it.toObject<User>()!!.name
-                                        itemAdapter[chatDoc.newIndex] = ChatItem(chat)
+                                        itemAdapter[chatDoc.newIndex] = ChatItem(chat, otherUserEmail)
                                     }
                             }
                             // ================================================================
 
 
-                            itemAdapter.add(chatDoc.newIndex, ChatItem(chat))
+                            itemAdapter.add(chatDoc.newIndex, ChatItem(chat,otherImage))
                         }
                         // REACT TO REMOVE EVENT ON SERVER/LOCAL
                         DocumentChange.Type.REMOVED -> {
@@ -173,7 +185,7 @@ class ChatsFragment : Fragment() {
                     }
                 }
 
-                if(_binding != null){
+                if (_binding != null) {
                     binding.chatsRv.smoothScrollToPosition(0)
                 }
             }

@@ -27,35 +27,26 @@ class UserItem(val user: User?) :
 
         binding.peopleName.text = user?.name ?: ""
 
-        val femaleAvatar = Operations.store.getReference("images/female.png")
-        val maleAvatar = Operations.store.getReference("images/male.png")
+        val avatar = Operations.store.getReference("images/avatar.jpg")
 
 
         val reference = Operations.store.getReference("images/users/${user?.email}.jpg")
 
         reference.downloadUrl.addOnSuccessListener {
             binding.peoplePhotoRv.load(reference) {
-                crossfade(true)
+                //  crossfade(true)
 //                placeholder(R.drawable.ic_baseline_person_24)
                 transformations(CircleCropTransformation())
             }
         }
             .addOnFailureListener {
                 if (user != null) {
-                    if (user.gender == "female") {
-                        binding.peoplePhotoRv.load(femaleAvatar) {
-                            crossfade(true)
-                            transformations(CircleCropTransformation())
-                        }
-                    } else {
-                        binding.peoplePhotoRv.load(maleAvatar) {
-                            crossfade(true)
-                            transformations(CircleCropTransformation())
-                        }
+
+                    binding.peoplePhotoRv.load(avatar) {
+                        crossfade(true)
+                        transformations(CircleCropTransformation())
                     }
                 }
             }
-
-
     }
 }
