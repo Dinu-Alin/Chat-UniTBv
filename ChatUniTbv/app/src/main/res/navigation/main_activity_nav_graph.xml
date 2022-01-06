@@ -36,5 +36,9 @@
         android:id="@+id/messagesActivity"
         android:name="com.lagar.chatunitbv.ui.activities.MessagesActivity"
         android:label="activity_messages"
-        tools:layout="@layout/activity_messages" />
+        tools:layout="@layout/activity_messages" >
+        <argument
+            android:name="selectedChat"
+            app:argType="com.lagar.chatunitbv.models.Chat" />
+    </activity>
 </navigation>

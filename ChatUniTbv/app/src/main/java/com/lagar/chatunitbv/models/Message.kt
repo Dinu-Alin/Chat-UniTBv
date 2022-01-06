@@ -9,6 +9,7 @@ data class Message(
     val id: String? = null,
     val sender: String? = null,
     val content: String? = null,
+    val chatId: String? = null,
     @ServerTimestamp
     val timestamp: Date? = null
 )

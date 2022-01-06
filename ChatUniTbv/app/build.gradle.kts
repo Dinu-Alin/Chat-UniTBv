@@ -4,6 +4,7 @@ plugins {
     kotlin("kapt")
     id("com.google.gms.google-services")
     id("kotlin-android")
+    id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
 }
 
@@ -54,6 +55,10 @@ dependencies {
     val kotlin_version = "1.5.20"
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}")
     implementation("androidx.core:core-ktx:1.7.0")
+    implementation("androidx.navigation:navigation-runtime-ktx:2.3.5")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
+    implementation("androidx.fragment:fragment-ktx:1.4.0")
     implementation("androidx.appcompat:appcompat:1.4.0")
     implementation("com.google.android.material:material:1.4.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.1")
