@@ -10,7 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/chat_bar"
         android:layout_width="match_parent"
-        android:layout_height="53dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.1"
         android:background="@color/dark_gray"
         app:layout_constraintTop_toTopOf="parent">
         <ImageView
