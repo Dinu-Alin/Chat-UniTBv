@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.toObject
@@ -27,6 +28,7 @@ import java.util.*
 
 class ChatsFragment : Fragment() {
 
+    private lateinit var chatsListener: ListenerRegistration
     private lateinit var user: User
     private var _binding: ChatsFragmentBinding? = null
     private val binding get() = _binding!!
@@ -65,38 +67,26 @@ class ChatsFragment : Fragment() {
         binding.chatsRv.adapter = fastAdapter
 
         attachChatListener()
-//        attachMessagesListener()
+        attachMessagesListener()
 
         binding.chatsRv.layoutManager = LinearLayoutManager(context)
     }
 
-//    private fun attachMessagesListener() {
-//        Operations.db.collection("chats")
-//    }
-
-    private fun attachChatListener() {
-
-//        val chats = Operations.db.collection("chats").get().addOnSuccessListener {
-//            for(document in it){
-//                document.reference.collection("messages").addSnapshotListener()
-//            }
-//        }
-
+    private fun attachMessagesListener() {
         Operations.db.collection("chats")
             .whereArrayContains("members", user.email!!)
             .orderBy("timestamp", Query.Direction.DESCENDING)
-            .addSnapshotListener { chatsDocsChanged, e ->
+            .addSnapshotListener { chatsDocs, e ->
                 if (e != null) {
                     Timber.w("Chats listen error: $e")
                     return@addSnapshotListener
                 }
-
-                for (chatDoc in chatsDocsChanged!!.documentChanges) {
+                for (chatDoc in chatsDocs!!.documentChanges) {
 
                     chatDoc.document.reference.collection("messages")
-                        .addSnapshotListener { messageDocsChanged, e ->
-                            if (e != null) {
-                                Timber.w("Chats>Messages listen error: $e")
+                        .addSnapshotListener { messageDocsChanged, error ->
+                            if (error != null) {
+                                Timber.w("Chats>Messages listen error: $error")
                             }
                             val chat = chatDoc.document.toObject<Chat>()
                             val oldTimestamp = chat.timestamp
@@ -117,6 +107,23 @@ class ChatsFragment : Fragment() {
                                 updateChatTimestamp(mostRecentTimestamp, chat)
                             }
                         }
+                }
+            }
+    }
+
+    private fun attachChatListener() {
+
+        chatsListener = Operations.db.collection("chats")
+            .whereArrayContains("members", user.email!!)
+            .orderBy("timestamp", Query.Direction.DESCENDING)
+            .addSnapshotListener { chatsDocsChanged, e ->
+                if (e != null) {
+                    Timber.w("Chats listen error: $e")
+                    return@addSnapshotListener
+                }
+
+                for (chatDoc in chatsDocsChanged!!.documentChanges) {
+
 
                     when (chatDoc.type) {
                         // REACT TO ADD EVENT ON SERVER/LOCAL
@@ -165,6 +172,10 @@ class ChatsFragment : Fragment() {
                         }
                     }
                 }
+
+                if(_binding != null){
+                    binding.chatsRv.smoothScrollToPosition(0)
+                }
             }
     }
 
@@ -178,7 +189,13 @@ class ChatsFragment : Fragment() {
                     "timestamp" to newTimestamp
                 ),
                 SetOptions.merge()
-            )
+            ).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    itemAdapter.clear()
+                    chatsListener.remove()
+                    attachChatListener()
+                }
+            }
     }
 
     override fun onCreateView(
