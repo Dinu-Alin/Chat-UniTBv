@@ -29,8 +29,10 @@ class ChatItem(val chat: Chat?) :
 
         binding.chatLastAcessed.text = prettyPrintDate(chat?.timestamp)
         binding.chatName.text = chat?.name ?: ""
-
-        val reference = Operations.store.getReference("images/chats/${chat?.id}.png");
+        if (chat!!.imageUrl == null) {
+            chat.imageUrl = "images/chats/${chat.id}.png"
+        }
+        val reference = Operations.store.getReference(chat.imageUrl!!)
 
         binding.chatPhotoRv.load(reference) {
             crossfade(true)

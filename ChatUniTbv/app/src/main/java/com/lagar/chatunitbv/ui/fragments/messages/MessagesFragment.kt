@@ -4,29 +4,34 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
 import com.lagar.chatunitbv.databinding.FragmentMessagesBinding
 import com.lagar.chatunitbv.firebase.Operations
+import com.lagar.chatunitbv.models.Chat
 import com.lagar.chatunitbv.models.Message
 import com.lagar.chatunitbv.models.User
 import com.lagar.chatunitbv.preferences.UserSharedPreferencesRepository
+import com.lagar.chatunitbv.ui.activities.MessagesActivity
 import com.lagar.chatunitbv.ui.items.ReceivedMessageItem
 import com.lagar.chatunitbv.ui.items.SentMessageItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
-import com.mikepenz.fastadapter.adapters.ItemAdapter
 import timber.log.Timber
 import java.util.*
 
 class MessagesFragment : Fragment() {
 
+    private lateinit var chat: Chat
     private lateinit var user: User
+
 
     private var _binding: FragmentMessagesBinding? = null
     private val binding get() = _binding!!
@@ -36,6 +41,8 @@ class MessagesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        chat = (activity as MessagesActivity).getChat()
 
         val sharedPreferences = UserSharedPreferencesRepository(
             this.requireActivity().getSharedPreferences("USER", AppCompatActivity.MODE_PRIVATE)
@@ -51,25 +58,34 @@ class MessagesFragment : Fragment() {
 //            Toast.makeText(context, "Sent!${binding.newMessageEditText.text}", Toast.LENGTH_SHORT)
 //                .show()
             if (binding.newMessageEditText.text.isNotEmpty()) {
-                Operations.db.collection("messages").add(
+                val chatRef = Operations.db.collection("chats").document(chat.id!!)
+                // add message
+                chatRef.collection("messages").add(
                     Message(
-                        id = UUID.randomUUID().toString() + "_test",
                         sender = user.name,
-                        content = binding.newMessageEditText.text.toString()
+                        content = binding.newMessageEditText.text.toString(),
+                        chatId = chat.id
                     )
-                ).addOnSuccessListener {
-                }
+                )
+
                 binding.newMessageEditText.text.clear()
-                binding.messagesRv.smoothScrollToPosition(itemAdapter.itemList.size() - 1)
+                if (itemAdapter.itemList.size() >= 1) {
+                    binding.messagesRv.smoothScrollToPosition(itemAdapter.itemList.size() - 1)
+                }
             }
         }
         attachListener()
 
-        binding.messagesRv.layoutManager = LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(context)
+        layoutManager.reverseLayout = false
+        layoutManager.stackFromEnd = true
+        binding.messagesRv.layoutManager = layoutManager
     }
 
     private fun attachListener() {
-        Operations.db.collection("messages")
+        Operations.db
+            .collection("chats").document(chat.id!!)
+            .collection("messages")
             .orderBy("timestamp", Query.Direction.ASCENDING)
             .addSnapshotListener { messagesDocs, e ->
                 if (e != null) {
@@ -120,8 +136,11 @@ class MessagesFragment : Fragment() {
                     }
                 }
                 // scroll to last message
-                binding.messagesRv.scrollToPosition(itemAdapter.itemList.size() - 1)
-
+                if (itemAdapter.itemList.size() >= 1) {
+                    if (_binding != null) {
+                        binding.messagesRv.scrollToPosition(itemAdapter.itemList.size() - 1)
+                    }
+                }
             }
     }
 

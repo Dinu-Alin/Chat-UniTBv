@@ -22,6 +22,7 @@ class ReceivedMessageItem(val message: Message?) :
     override fun bindView(binding: ReceivedMessageItemLayoutBinding, payloads: List<Any>) {
         binding.receivedMessageBody.text = message?.content ?: ""
         binding.receivedMessageDate.text = prettyPrintDate(message?.timestamp)
+        binding.receivedMessageSender.text = message?.sender
     }
 
 }

@@ -157,12 +157,19 @@ fun prettyPrintDate(date: Date? = null): String {
 
     val calendarTime = date.toCalendar()
 
-    val hour = calendarTime.get(Calendar.HOUR)
-    val minute = calendarTime.get(Calendar.MINUTE)
+    var hour = calendarTime.get(Calendar.HOUR).toString()
+    var minute = calendarTime.get(Calendar.MINUTE).toString()
     val amPm = if (calendarTime.get(Calendar.AM_PM) == 1) {
         "pm"
     } else {
         "am"
+    }
+
+    if (hour.toInt() < 10) {
+        hour = "0$hour"
+    }
+    if (minute.toInt() < 10) {
+        minute = "${minute}0"
     }
 
     return "$hour:$minute $amPm"

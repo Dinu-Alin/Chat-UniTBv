@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +13,9 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
 import com.lagar.chatunitbv.databinding.ChatsFragmentBinding
 import com.lagar.chatunitbv.firebase.Operations
+import com.lagar.chatunitbv.models.Chat
+import com.lagar.chatunitbv.models.User
+import com.lagar.chatunitbv.preferences.UserSharedPreferencesRepository
 import com.lagar.chatunitbv.ui.items.ChatItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
@@ -22,6 +26,7 @@ import java.util.*
 
 class ChatsFragment : Fragment() {
 
+    private lateinit var user: User
     private var _binding: ChatsFragmentBinding? = null
     private val binding get() = _binding!!
 
@@ -31,6 +36,11 @@ class ChatsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val sharedPreferences = UserSharedPreferencesRepository(
+            this.requireActivity().getSharedPreferences("USER", AppCompatActivity.MODE_PRIVATE)
+        )
+        user = sharedPreferences.read()
 
         _binding = ChatsFragmentBinding.inflate(layoutInflater)
 
@@ -44,7 +54,8 @@ class ChatsFragment : Fragment() {
 //                .document(item.chat!!.id!!)
 //                .update("time", FieldValue.serverTimestamp())
 
-            val directions = ChatsFragmentDirections.actionNavigationChatsToMessagesActivity()
+            val directions =
+                ChatsFragmentDirections.actionNavigationChatsToMessagesActivity(item.chat!!)
             findNavController().navigate(directions)
 //            activity?.overridePendingTransition(R.anim.slide_in, R.anim.slide_out)
 
@@ -52,14 +63,20 @@ class ChatsFragment : Fragment() {
         }
         binding.chatsRv.adapter = fastAdapter
 
-        attachListener()
+        attachChatListener()
+        attachMessagesListener()
 
         binding.chatsRv.layoutManager = LinearLayoutManager(context)
     }
 
-    private fun attachListener() {
+    private fun attachMessagesListener() {
         Operations.db.collection("chats")
-            .orderBy("name", Query.Direction.DESCENDING)
+    }
+
+    private fun attachChatListener() {
+        Operations.db.collection("chats")
+            .whereArrayContains("members", user.email!!)
+            .orderBy("timestamp", Query.Direction.DESCENDING)
             .addSnapshotListener { chatsDocsChanged, e ->
                 if (e != null) {
                     Timber.w("Chats listen error: $e")
@@ -70,7 +87,20 @@ class ChatsFragment : Fragment() {
                     when (chatDoc.type) {
                         DocumentChange.Type.ADDED -> {
                             Timber.d("Chat document added: ${chatDoc.document.data}")
-                            itemAdapter.add(chatDoc.newIndex, ChatItem(chatDoc.document.toObject()))
+                            val chat = chatDoc.document.toObject<Chat>()
+                            if (chat.memberCount == 2) {
+                                val otherUserEmail =
+                                    chat.members!!.first { email -> email != user.email }
+//                                chat.name = otherUserEmail
+
+                                chat.imageUrl = "images/users/${otherUserEmail}.jpg"
+                                Operations.db.collection("users").document(otherUserEmail!!).get()
+                                    .addOnSuccessListener {
+                                        chat.name = it.toObject<User>()!!.name
+                                        itemAdapter[chatDoc.newIndex] = ChatItem(chat)
+                                    }
+                            }
+                            itemAdapter.add(chatDoc.newIndex, ChatItem(chat))
                         }
                         DocumentChange.Type.REMOVED -> {
                             Timber.d("Chat document removed: ${chatDoc.document.data}")
@@ -110,4 +140,6 @@ class ChatsFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }
