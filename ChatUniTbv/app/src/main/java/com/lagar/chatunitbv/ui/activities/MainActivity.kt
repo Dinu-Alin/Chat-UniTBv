@@ -23,14 +23,21 @@ import com.google.android.material.navigation.NavigationView
 import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.ActivityMainBinding
 import android.content.Intent
+import android.net.Uri
+import android.util.AttributeSet
+import android.widget.Button
 import android.widget.ImageView
+import coil.load
 import coil.transform.CircleCropTransformation
 import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.storage.FirebaseStorage
+import com.lagar.chatunitbv.databinding.SlidingMenuHeaderBinding
 import com.lagar.chatunitbv.firebase.Operations
 import com.lagar.chatunitbv.models.Group
 import com.lagar.chatunitbv.models.User
 import com.lagar.chatunitbv.preferences.UserSharedPreferencesRepository
 import io.github.rosariopfernandes.firecoil.load
+import java.net.URI
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var title: TextView
     private lateinit var user: User
-
+    private lateinit var imageUri: Uri
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -47,7 +54,6 @@ class MainActivity : AppCompatActivity() {
             this.getSharedPreferences("USER", MODE_PRIVATE)
         )
         user = sharedPreferences.read()
-
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -114,11 +120,51 @@ class MainActivity : AppCompatActivity() {
             switchActivities()
         }
 
+        binding.navView.getHeaderView(0).findViewById<Button>(R.id.upload_photo)
+            .setOnClickListener {
+                uploadImage()
+
+            }
+
+
         Operations.db.collection("groups").document("${user.group}").get()
             .addOnSuccessListener {
                 val group = it.toObject<Group>()
                 setupUserData(group)
             }
+    }
+
+    private fun uploadImage() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+
+        startActivityForResult(intent, 100)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 100 && resultCode == RESULT_OK) {
+
+            imageUri = data?.data!!
+
+            val profilePicture: ImageView = findViewById(R.id.profile_image)
+            val storageReference =
+                FirebaseStorage.getInstance().getReference("images/users/${user.email}.jpg")
+            storageReference.putFile(imageUri).addOnSuccessListener {
+                profilePicture.load(imageUri) {
+                    crossfade(true)
+                    transformations(CircleCropTransformation())
+                }
+            }.addOnFailureListener {
+
+            }
+            profilePicture.load(imageUri) {
+                crossfade(true)
+                transformations(CircleCropTransformation())
+            }
+
+        }
     }
 
     private fun setupUserData(group: Group?) {
@@ -163,4 +209,6 @@ class MainActivity : AppCompatActivity() {
         val switchActivityIntent = Intent(this, StartActivity::class.java)
         startActivity(switchActivityIntent)
     }
+
+
 }
