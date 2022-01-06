@@ -104,9 +104,11 @@ class ChatsFragment : Fragment() {
 
                             for (messageDoc in messageDocsChanged!!.documentChanges) {
                                 val messageTimestamp =
-                                    messageDoc.document.getTimestamp("timestamp")!!.toDate()
-                                if (messageTimestamp.after(oldTimestamp)) {
-                                    mostRecentTimestamp = messageTimestamp
+                                    messageDoc.document.getTimestamp("timestamp")?.toDate()
+                                if (messageTimestamp != null) {
+                                    if (messageTimestamp.after(oldTimestamp)) {
+                                        mostRecentTimestamp = messageTimestamp
+                                    }
                                 }
                             }
 
