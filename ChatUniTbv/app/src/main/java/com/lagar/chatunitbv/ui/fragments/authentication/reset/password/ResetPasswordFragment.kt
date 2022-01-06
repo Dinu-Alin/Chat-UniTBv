@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.FragmentResetPasswordBinding
 import com.lagar.chatunitbv.firebase.Operations
-import com.lagar.chatunitbv.ui.fragments.authentication.register.RegisterFragment
+import com.lagar.chatunitbv.ui.fragments.authentication.register.RegisterStep1Fragment
 import com.lagar.chatunitbv.util.checks.InternetCheck
 import com.lagar.chatunitbv.util.validators.FieldValidators
 
@@ -73,11 +73,11 @@ class ResetPasswordFragment : Fragment() {
             when (view.id) {
 
                 binding.editTextEmail.id -> {
-                    RegisterFragment.emailValid = validateEmail()
+                    RegisterStep1Fragment.emailValid = validateEmail()
                 }
 
             }
-            if (RegisterFragment.emailValid) {
+            if (RegisterStep1Fragment.emailValid) {
                 binding.btnResetPassword.isEnabled = true
                 binding.btnResetPassword.background = ResourcesCompat.getDrawable(
                     resources,

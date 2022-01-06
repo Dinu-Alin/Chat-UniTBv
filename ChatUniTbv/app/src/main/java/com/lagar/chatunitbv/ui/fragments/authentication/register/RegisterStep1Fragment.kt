@@ -3,20 +3,40 @@ package com.lagar.chatunitbv.ui.fragments.authentication.register
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.AuthCredential
 import com.lagar.chatunitbv.R
-import com.lagar.chatunitbv.databinding.RegisterFragmentBinding
+import com.lagar.chatunitbv.databinding.RegisterStep1FragmentBinding
+import com.lagar.chatunitbv.firebase.Operations
+import com.lagar.chatunitbv.ui.fragments.authentication.start.StartFragmentDirections
+import com.lagar.chatunitbv.ui.fragments.chats.ChatsFragmentDirections
 import com.lagar.chatunitbv.util.validators.FieldValidators
 import com.lagar.chatunitbv.util.validators.FieldValidators.containsNumber
 import com.lagar.chatunitbv.util.validators.FieldValidators.isStringLowerAndUpperCase
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.tasks.await
+import com.google.firebase.firestore.DocumentSnapshot
 
-class RegisterFragment : Fragment() {
-    private var _binding: RegisterFragmentBinding? = null
+import androidx.annotation.NonNull
+
+import com.google.android.gms.tasks.OnCompleteListener
+
+import com.google.firebase.firestore.DocumentReference
+
+import com.google.firebase.firestore.FirebaseFirestore
+import timber.log.Timber
+
+
+class RegisterStep1Fragment : Fragment() {
+    private var _binding: RegisterStep1FragmentBinding? = null
 
     private val binding get() = _binding!!
 
@@ -24,17 +44,42 @@ class RegisterFragment : Fragment() {
         var emailValid: Boolean = false
         var passwordValid: Boolean = false
         var confirmPasswordValid: Boolean = false
+
+        const val TAG = "RegisterEmailPassword"
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = RegisterFragmentBinding.inflate(inflater, container, false)
+        _binding = RegisterStep1FragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         binding.goToLoginButton.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_register_to_navigation_login)
+            val direction =
+                RegisterStep1FragmentDirections.actionNavigationRegisterToNavigationLogin()
+            findNavController().navigate(direction)
+
+        }
+
+        binding.buttonNext.setOnClickListener {
+
+            Operations.auth.fetchSignInMethodsForEmail(binding.editTextEmail.text.toString())
+                .addOnCompleteListener {
+                    if (it.result?.signInMethods?.contains("password") == false) {
+                        val directions =
+                            RegisterStep1FragmentDirections.actionNavigationRegisterToRegisterStep2Fragment(
+                                email = binding.editTextEmail.text.toString(),
+                                password = binding.editTextPassword.text.toString()
+                            )
+                        findNavController().navigate(directions)
+                    } else {
+                        binding.emailLayout.error = "Email already in use!"
+                        binding.editTextEmail.requestFocus()
+                    }
+                }
+
 
         }
 
@@ -130,15 +175,15 @@ class RegisterFragment : Fragment() {
                 }
             }
             if (emailValid && passwordValid && confirmPasswordValid) {
-                binding.buttonSingUp.isEnabled = true
-                binding.buttonSingUp.background = ResourcesCompat.getDrawable(
+                binding.buttonNext.isEnabled = true
+                binding.buttonNext.background = ResourcesCompat.getDrawable(
                     resources,
                     R.drawable.shape_button_background_black,
                     null
                 )
             } else {
-                binding.buttonSingUp.isEnabled = false
-                binding.buttonSingUp.background = ResourcesCompat.getDrawable(
+                binding.buttonNext.isEnabled = false
+                binding.buttonNext.background = ResourcesCompat.getDrawable(
                     resources,
                     R.drawable.shape_button_background_gray,
                     null
@@ -146,5 +191,6 @@ class RegisterFragment : Fragment() {
             }
         }
     }
+
     // TODO add user shared preferences as in LoginFragment
 }

@@ -49,11 +49,16 @@
         <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/content_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/fragment_messages.xml" value="0.36666666666666664" />
         <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/fragment_reset_password.xml" value="0.29292929292929293" />
+        <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/list_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/login_fragment.xml" value="0.1" />
         <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/people_fragment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/received_message_item_layout.xml" value="0.33" />
         <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/register_fragment.xml" value="0.25" />
+        <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/register_step2_fragment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/sent_message_item_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/start_fragment.xml" value="0.1" />
         <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20520833333333333" />
+        <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/menu/gender_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Info Unitbv 2021-2022/Semestrul 1/IS/Chat UNITBV/Chat-UniTBv/ChatUniTbv/app/src/main/res/menu/sliding_menu_header.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/adita/Documents/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.40572916666666664" />
         <entry key="..\:/Users/adita/Documents/GitHub/Chat-UniTBv/ChatUniTbv/app/src/main/res/drawable/default_cursor.xml" value="0.40572916666666664" />
@@ -96,11 +101,9 @@
         <entry key="..\:/Users/adrian/Documents/_projects/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/login_fragment.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/adrian/Documents/_projects/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/people_fragment.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/adrian/Documents/_projects/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/people_item_layout.xml" value="0.20260416666666667" />
-        <entry key="..\:/Users/adrian/Documents/_projects/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/received_message_item_layout.xml" value="0.3625" />
         <entry key="..\:/Users/adrian/Documents/_projects/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/register_fragment.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/adrian/Documents/_projects/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/start_fragment.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/adrian/Documents/_projects/Chat-UniTBv/ChatUniTbv/app/src/main/res/layout/users_fragment.xml" value="0.20260416666666667" />
-        <entry key="..\:/Users/adrian/Documents/_projects/Chat-UniTBv/ChatUniTbv/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/adrian/Documents/_projects/Chat-UniTBv/ChatUniTbv/app/src/main/res/menu/sliding_menu_header.xml" value="0.3625" />
         <entry key="..\:/Users/adrian/Documents/_projects/Chat-UniTBv/ChatUniTbv/app/src/main/res/mipmap-anydpi-v26/female_placeholder.xml" value="0.21875" />
       </map>

@@ -49,4 +49,9 @@
     <string name="sender">Sender</string>
     <string name="send">Send</string>
     <string name="new_message">New message</string>
+    <string name="last_name">Last name</string>
+    <string name="first_name">First name</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="gender">Gender</string>
 </resources>

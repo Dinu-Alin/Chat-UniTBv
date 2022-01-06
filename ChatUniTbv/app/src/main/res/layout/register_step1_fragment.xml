@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.authentication.register.RegisterFragment">
+    tools:context=".ui.fragments.authentication.register.RegisterStep1Fragment">
 
     <ScrollView
         android:layout_width="0dp"
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-                app:layout_constraintBottom_toTopOf="@id/button_sing_up"
+                app:layout_constraintBottom_toTopOf="@id/button_next"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_view_register">
@@ -126,12 +126,12 @@
 
 
             <Button
-                android:id="@+id/button_sing_up"
+                android:id="@+id/button_next"
                 style="@style/BlackButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:enabled="false"
-                android:text="@string/sign_up"
+                android:text="@string/next"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -150,7 +150,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/go_to_login_button"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/button_sing_up"
+                app:layout_constraintTop_toBottomOf="@id/button_next"
                 app:layout_constraintVertical_bias="0.2"
                 app:layout_constraintVertical_chainStyle="packed" />
 
@@ -164,7 +164,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/question"
-                app:layout_constraintTop_toBottomOf="@id/button_sing_up"
+                app:layout_constraintTop_toBottomOf="@id/button_next"
                 app:layout_constraintVertical_bias="0.2"
                 app:layout_constraintVertical_chainStyle="packed" />
 
