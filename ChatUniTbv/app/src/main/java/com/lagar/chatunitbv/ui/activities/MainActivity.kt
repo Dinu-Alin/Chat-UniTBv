@@ -193,6 +193,7 @@ class MainActivity : AppCompatActivity() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed()
             finish()
+            finishAffinity()
             return
         }
 
