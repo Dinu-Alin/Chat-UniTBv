@@ -32,12 +32,15 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_register"
-        android:name="com.lagar.chatunitbv.ui.fragments.authentication.register.RegisterFragment"
+        android:name="com.lagar.chatunitbv.ui.fragments.authentication.register.RegisterStep1Fragment"
         android:label="register_fragment"
-        tools:layout="@layout/register_fragment" >
+        tools:layout="@layout/register_step1_fragment" >
         <action
             android:id="@+id/action_navigation_register_to_navigation_login"
             app:destination="@id/navigation_login" />
+        <action
+            android:id="@+id/action_navigation_register_to_registerStep2Fragment"
+            app:destination="@id/registerStep2Fragment" />
     </fragment>
 
     <activity
@@ -50,4 +53,19 @@
         android:name="com.lagar.chatunitbv.ui.fragments.authentication.reset.password.ResetPasswordFragment"
         android:label="fragment_reset_password"
         tools:layout="@layout/fragment_reset_password" />
+    <fragment
+        android:id="@+id/registerStep2Fragment"
+        android:name="com.lagar.chatunitbv.ui.fragments.authentication.register.RegisterStep2Fragment"
+        android:label="register_step2_fragment"
+        tools:layout="@layout/register_step2_fragment" >
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_registerStep2Fragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
 </navigation>
