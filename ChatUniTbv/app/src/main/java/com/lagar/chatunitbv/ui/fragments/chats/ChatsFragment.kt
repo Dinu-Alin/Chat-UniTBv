@@ -116,7 +116,7 @@ class ChatsFragment : Fragment() {
 
         chatsListener = Operations.db.collection("chats")
             .whereArrayContains("members", user.email!!)
-            .orderBy("timestamp", Query.Direction.DESCENDING)
+//            .orderBy("timestamp", Query.Direction.DESCENDING)
             .addSnapshotListener { chatsDocsChanged, e ->
                 if (e != null) {
                     Timber.w("Chats listen error: $e")
@@ -132,7 +132,7 @@ class ChatsFragment : Fragment() {
 
                             Timber.d("Chat document added: ${chatDoc.document.data}")
                             val chat = chatDoc.document.toObject<Chat>()
-                            var otherImage =""
+                            var otherImage = ""
                             // ================================================================
                             if (chat.memberCount == 2) {
                                 val otherUserEmail =
@@ -152,14 +152,18 @@ class ChatsFragment : Fragment() {
                                     }
                                 Operations.db.collection("users").document(otherUserEmail!!).get()
                                     .addOnSuccessListener {
-                                        chat.name = it.toObject<User>()!!.name
-                                        itemAdapter[chatDoc.newIndex] = ChatItem(chat, otherUserEmail)
+                                        chat.name = it.toObject<User>()?.name
+
+                                        if (itemAdapter.itemList.size() > chatDoc.newIndex) {
+                                            itemAdapter[chatDoc.newIndex] =
+                                                ChatItem(chat, otherUserEmail)
+                                        }
                                     }
                             }
                             // ================================================================
 
 
-                            itemAdapter.add(chatDoc.newIndex, ChatItem(chat,otherImage))
+                            itemAdapter.add(chatDoc.newIndex, ChatItem(chat, otherImage))
                         }
                         // REACT TO REMOVE EVENT ON SERVER/LOCAL
                         DocumentChange.Type.REMOVED -> {

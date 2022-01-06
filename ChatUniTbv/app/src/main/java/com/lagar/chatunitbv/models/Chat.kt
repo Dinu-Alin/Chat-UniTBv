@@ -2,6 +2,7 @@ package com.lagar.chatunitbv.models
 
 import android.os.Parcelable
 import com.google.firebase.firestore.DocumentId
+import com.google.firebase.firestore.ServerTimestamp
 import kotlinx.parcelize.Parcelize
 import java.util.*
 
@@ -12,6 +13,7 @@ data class Chat(
     var name: String? = null,
     var members: List<String?>? = null,
     var memberCount: Int? = null,
+    @ServerTimestamp
     var timestamp: Date? = null,
     var image: String? = null
 ) : Parcelable
