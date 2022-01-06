@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.toObject
 import com.lagar.chatunitbv.databinding.ChatsFragmentBinding
 import com.lagar.chatunitbv.firebase.Operations
@@ -75,9 +76,15 @@ class ChatsFragment : Fragment() {
 
     private fun attachChatListener() {
 
+//        val chats = Operations.db.collection("chats").get().addOnSuccessListener {
+//            for(document in it){
+//                document.reference.collection("messages").addSnapshotListener()
+//            }
+//        }
+
         Operations.db.collection("chats")
             .whereArrayContains("members", user.email!!)
-//            .orderBy("timestamp", Query.Direction.DESCENDING)
+            .orderBy("timestamp", Query.Direction.DESCENDING)
             .addSnapshotListener { chatsDocsChanged, e ->
                 if (e != null) {
                     Timber.w("Chats listen error: $e")
@@ -85,6 +92,30 @@ class ChatsFragment : Fragment() {
                 }
 
                 for (chatDoc in chatsDocsChanged!!.documentChanges) {
+
+                    chatDoc.document.reference.collection("messages")
+                        .addSnapshotListener { messageDocsChanged, e ->
+                            if (e != null) {
+                                Timber.w("Chats>Messages listen error: $e")
+                            }
+                            val chat = chatDoc.document.toObject<Chat>()
+                            val oldTimestamp = chat.timestamp
+                            var mostRecentTimestamp = oldTimestamp
+
+                            for (messageDoc in messageDocsChanged!!.documentChanges) {
+                                val messageTimestamp =
+                                    messageDoc.document.getTimestamp("timestamp")!!.toDate()
+                                if (messageTimestamp.after(oldTimestamp)) {
+                                    mostRecentTimestamp = messageTimestamp
+                                }
+                            }
+
+                            if (mostRecentTimestamp != oldTimestamp) {
+                                chat.timestamp = mostRecentTimestamp
+                                updateChatTimestamp(mostRecentTimestamp, chat)
+                            }
+                        }
+
                     when (chatDoc.type) {
                         // REACT TO ADD EVENT ON SERVER/LOCAL
                         DocumentChange.Type.ADDED -> {
@@ -133,6 +164,19 @@ class ChatsFragment : Fragment() {
                     }
                 }
             }
+    }
+
+    private fun updateChatTimestamp(newTimestamp: Date?, chat: Chat?) {
+        Operations
+            .db
+            .collection("chats")
+            .document(chat!!.id!!)
+            .set(
+                hashMapOf(
+                    "timestamp" to newTimestamp
+                ),
+                SetOptions.merge()
+            )
     }
 
     override fun onCreateView(

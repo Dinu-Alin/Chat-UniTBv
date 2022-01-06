@@ -169,7 +169,7 @@ fun prettyPrintDate(date: Date? = null): String {
         hour = "0$hour"
     }
     if (minute.toInt() < 10) {
-        minute = "${minute}0"
+        minute = "0$minute"
     }
 
     return "$hour:$minute $amPm"
