@@ -2,7 +2,6 @@ package com.lagar.chatunitbv.ui.items
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import coil.load
 import coil.transform.CircleCropTransformation
 import com.lagar.chatunitbv.R
 import com.lagar.chatunitbv.databinding.ChatItemLayoutBinding
@@ -29,10 +28,10 @@ class ChatItem(val chat: Chat?) :
 
         binding.chatLastAcessed.text = prettyPrintDate(chat?.timestamp)
         binding.chatName.text = chat?.name ?: ""
-        if (chat!!.imageUrl == null) {
-            chat.imageUrl = "images/chats/${chat.id}.png"
+        if (chat!!.image.isNullOrEmpty()) {
+            chat.image = "images/chats/${chat.id}.png"
         }
-        val reference = Operations.store.getReference(chat.imageUrl!!)
+        val reference = Operations.store.getReference(chat.image!!)
 
         binding.chatPhotoRv.load(reference) {
             crossfade(true)

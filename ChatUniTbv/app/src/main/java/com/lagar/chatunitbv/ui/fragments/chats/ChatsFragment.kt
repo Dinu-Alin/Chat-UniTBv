@@ -64,19 +64,20 @@ class ChatsFragment : Fragment() {
         binding.chatsRv.adapter = fastAdapter
 
         attachChatListener()
-        attachMessagesListener()
+//        attachMessagesListener()
 
         binding.chatsRv.layoutManager = LinearLayoutManager(context)
     }
 
-    private fun attachMessagesListener() {
-        Operations.db.collection("chats")
-    }
+//    private fun attachMessagesListener() {
+//        Operations.db.collection("chats")
+//    }
 
     private fun attachChatListener() {
+
         Operations.db.collection("chats")
             .whereArrayContains("members", user.email!!)
-            .orderBy("timestamp", Query.Direction.DESCENDING)
+//            .orderBy("timestamp", Query.Direction.DESCENDING)
             .addSnapshotListener { chatsDocsChanged, e ->
                 if (e != null) {
                     Timber.w("Chats listen error: $e")
@@ -85,27 +86,35 @@ class ChatsFragment : Fragment() {
 
                 for (chatDoc in chatsDocsChanged!!.documentChanges) {
                     when (chatDoc.type) {
+                        // REACT TO ADD EVENT ON SERVER/LOCAL
                         DocumentChange.Type.ADDED -> {
+
                             Timber.d("Chat document added: ${chatDoc.document.data}")
                             val chat = chatDoc.document.toObject<Chat>()
+
+                            // ================================================================
                             if (chat.memberCount == 2) {
                                 val otherUserEmail =
                                     chat.members!!.first { email -> email != user.email }
-//                                chat.name = otherUserEmail
 
-                                chat.imageUrl = "images/users/${otherUserEmail}.jpg"
+                                chat.image = "images/users/${otherUserEmail}.jpg"
                                 Operations.db.collection("users").document(otherUserEmail!!).get()
                                     .addOnSuccessListener {
                                         chat.name = it.toObject<User>()!!.name
                                         itemAdapter[chatDoc.newIndex] = ChatItem(chat)
                                     }
                             }
+                            // ================================================================
+
+
                             itemAdapter.add(chatDoc.newIndex, ChatItem(chat))
                         }
+                        // REACT TO REMOVE EVENT ON SERVER/LOCAL
                         DocumentChange.Type.REMOVED -> {
                             Timber.d("Chat document removed: ${chatDoc.document.data}")
                             itemAdapter.remove(chatDoc.oldIndex)
                         }
+                        // REACT TO MODIFY EVENT ON SERVER/LOCAL
                         DocumentChange.Type.MODIFIED -> {
                             Timber.d("Chat document modified: ${chatDoc.document.data}")
                             if (chatDoc.newIndex != chatDoc.oldIndex) {
@@ -120,7 +129,6 @@ class ChatsFragment : Fragment() {
                                 itemAdapter[chatDoc.newIndex] =
                                     ChatItem(chatDoc.document.toObject())
                             }
-
                         }
                     }
                 }

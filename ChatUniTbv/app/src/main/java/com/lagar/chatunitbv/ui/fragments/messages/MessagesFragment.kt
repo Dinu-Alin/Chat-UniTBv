@@ -68,6 +68,7 @@ class MessagesFragment : Fragment() {
                     )
                 )
 
+
                 binding.newMessageEditText.text.clear()
                 if (itemAdapter.itemList.size() >= 1) {
                     binding.messagesRv.smoothScrollToPosition(itemAdapter.itemList.size() - 1)
