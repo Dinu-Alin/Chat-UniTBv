@@ -116,7 +116,7 @@ class ChatsFragment : Fragment() {
 
         chatsListener = Operations.db.collection("chats")
             .whereArrayContains("members", user.email!!)
-//            .orderBy("timestamp", Query.Direction.DESCENDING)
+            .orderBy("timestamp", Query.Direction.DESCENDING)
             .addSnapshotListener { chatsDocsChanged, e ->
                 if (e != null) {
                     Timber.w("Chats listen error: $e")
