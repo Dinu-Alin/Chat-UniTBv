@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "949329159659",
-    "project_id": "chat-unitbv",
-    "storage_bucket": "chat-unitbv.appspot.com"
+    "project_number": "774848563697",
+    "project_id": "chat-unitbv-2",
+    "storage_bucket": "chat-unitbv-2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:949329159659:android:d6b8030167d873ac1d65ae",
+        "mobilesdk_app_id": "1:774848563697:android:c502d360647f1f8bf6dc50",
         "android_client_info": {
           "package_name": "com.lagar.chatunitbv"
         }
       },
       "oauth_client": [
         {
-          "client_id": "949329159659-3uciqok3mg04lnn3marns2lia4trttel.apps.googleusercontent.com",
+          "client_id": "774848563697-sl5iujmn1gueiic3s8rh14hs3i3t94om.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBYyh58ZMqdS2cPS6iMBtvNGstj9NuW_mk"
+          "current_key": "AIzaSyCADr9Yl-mt-g2AraJEwsQvRMWGn7ew0aw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "949329159659-3uciqok3mg04lnn3marns2lia4trttel.apps.googleusercontent.com",
+              "client_id": "774848563697-sl5iujmn1gueiic3s8rh14hs3i3t94om.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

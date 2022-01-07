@@ -48,7 +48,7 @@ class UsersFragment : Fragment(), ItemFilterListener<UserItem> {
 
         fastAdapter = FastAdapter.with(itemAdapter)
         fastAdapter.onClickListener = { _, _, item, _ ->
-            Toast.makeText(context, "Clicked ${item.user?.name}", Toast.LENGTH_SHORT).show()
+           // Toast.makeText(context, "Clicked ${item.user?.name}", Toast.LENGTH_SHORT).show()
 
 //            Operations.db
 //                .collection("chats")
